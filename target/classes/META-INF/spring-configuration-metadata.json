@@ -1,0 +1,27 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "bishe.lu.pojo.Resource",
+      "name": "bishe.lu.opensource",
+      "type": "bishe.lu.pojo.Resource"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "bishe.lu.pojo.Resource",
+      "name": "bishe.lu.opensource.language",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "bishe.lu.pojo.Resource",
+      "name": "bishe.lu.opensource.name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "bishe.lu.pojo.Resource",
+      "name": "bishe.lu.opensource.website",
+      "type": "java.lang.String"
+    }
+  ]
+}

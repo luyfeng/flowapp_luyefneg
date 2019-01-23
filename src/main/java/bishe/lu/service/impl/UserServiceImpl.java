@@ -4,8 +4,11 @@ import bishe.lu.dao.UserDOMapper;
 import bishe.lu.dao.UserPasswordDOMapper;
 import bishe.lu.dataobject.UserDO;
 import bishe.lu.dataobject.UserPasswordDO;
+import bishe.lu.error.BusinessException;
+import bishe.lu.error.EmBusinessError;
 import bishe.lu.service.UserService;
 import bishe.lu.service.model.UserModel;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +32,24 @@ public class UserServiceImpl implements UserService {
         UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
 
         return convertFromDataObject(userDO,userPasswordDO);
+
+    }
+
+    @Override
+    public UserModel validateLogin(String telphone, String encrptPassword) throws BusinessException {
+        //通过用户的手机获取登陆用户信息
+        UserDO userDO = userDOMapper.selectByTelphone(telphone);
+        if (userDO == null){
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
+        }
+        UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
+        UserModel userModel = convertFromDataObject(userDO,userPasswordDO);
+
+        //对比用户信息加密的密码是否和传输进来的密码相匹配
+        if (!StringUtils.equals(encrptPassword,userModel.getEncrptPassword())){
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
+        }
+        return userModel;
 
     }
 

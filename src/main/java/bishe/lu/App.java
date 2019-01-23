@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
  * Hello world!
  *
  */
-@SpringBootApplication(scanBasePackages = {"bishe.lu"})
+//@SpringBootApplication(scanBasePackages = {"bishe.lu"})
+@SpringBootApplication
 @RestController
-@MapperScan("bishe.lu.dao")
-public class App 
+//扫描mybatis mapper 包路径
+//@MapperScan("bishe.lu.dao")
+@MapperScan(basePackages = {"bishe.lu.dao","bishe.lu.mapper"})
+//扫描所有需要的包，包含一些自用的工具类包 所在的路径
+public class App
 {
     @Autowired
     private UserDOMapper userDOMapper;

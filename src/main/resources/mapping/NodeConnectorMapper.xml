@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bishe.lu.mapper.NodeConnectorMapper">
+  <resultMap id="BaseResultMap" type="bishe.lu.pojo.NodeConnector">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="port_number" jdbcType="VARCHAR" property="portNumber" />
+    <result column="hardware_address" jdbcType="VARCHAR" property="hardwareAddress" />
+    <result column="current_speed" jdbcType="VARCHAR" property="currentSpeed" />
+    <result column="port_name" jdbcType="VARCHAR" property="portName" />
+    <result column="port_state" jdbcType="BIT" property="portState" />
+  </resultMap>
+</mapper>
