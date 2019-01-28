@@ -23,7 +23,10 @@ public class HelloContoller {
 		
 		Resource bean = new Resource();
 		BeanUtils.copyProperties(resource, bean);
-		
+		System.out.println("configurationproperties111="+bean);
+		System.out.println("configurationproperties111="+bean.getLanguage());
+		System.out.println("configurationproperties111="+bean.getName());
+
 		return LuJSONResult.ok(bean);
 	}
 	

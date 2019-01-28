@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h2>UPDATEFLOW</h2>
+</div>
+<div th:object="${flowById}">
+    <h2>Update Data In Form</h2>
+    <form name="Form" action="/flow/updateFlow" method="post">
+        <!--<input type="text" id="flowid">-->
+        <input type="hidden" th:id="*{id}" name="id" th:value="*{id}" placeholder="id">
+        <input type="hidden" th:id="*{flowId}" name="flowId" th:value="*{flowId}" placeholder="flow_id">
+        <input type="text" th:id="*{priority}" name="priority" th:value="*{priority}" placeholder="priority">
+        <input type="text" th:id="*{tableId}" name="tableId" th:value="*{tableId}" placeholder="table_id">
+        <input type="text" th:id="*{hardTimeout}" name="hardTimeout" th:value="*{hardTimeout}" placeholder="hard-timeout">
+        <input type="text" th:id="*{idleTimeout}" name="idleTimeout" th:value="*{idleTimeout}" placeholder="idle-timeout">
+        <input type="text" th:id="*{flowName}" name="flowName" th:value="*{flowName}" placeholder="flow-name">
+        <input type="text" th:id="*{inPort}" name="inPort" th:value="*{inPort}" placeholder="in-port">
+        <input type="text" th:id="*{instructionOrder}" name="instructionOrder" th:value="*{instructionOrder}" placeholder="instruction-order">
+        <input type="text" th:id="*{actionOrder}" name="actionOrder" th:value="*{actionOrder}" placeholder="action-order">
+        <input type="text" th:id="*{outputNodeConnector}" name="outputNodeConnector" th:value="*{outputNodeConnector}" placeholder="output-node-connector">
+        <button type="submit" id="submit-put" value="put">put</button>
+    </form>
+</div>
+
+
+</body>
+</html>

@@ -7,6 +7,9 @@ public class TbFlow {
     @Id
     private String id;
 
+    @Column(name = "flow_id")
+    private String flowId;
+
     private String priority;
 
     @Column(name = "table_id")
@@ -45,6 +48,20 @@ public class TbFlow {
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    /**
+     * @return flow_id
+     */
+    public String getFlowId() {
+        return flowId;
+    }
+
+    /**
+     * @param flowId
+     */
+    public void setFlowId(String flowId) {
+        this.flowId = flowId;
     }
 
     /**
@@ -171,5 +188,22 @@ public class TbFlow {
      */
     public void setOutputNodeConnector(String outputNodeConnector) {
         this.outputNodeConnector = outputNodeConnector;
+    }
+
+    @Override
+    public String toString() {
+        return "TbFlow{" +
+                "id='" + id + '\'' +
+                ", flowId='" + flowId + '\'' +
+                ", priority='" + priority + '\'' +
+                ", tableId='" + tableId + '\'' +
+                ", hardTimeout='" + hardTimeout + '\'' +
+                ", idleTimeout='" + idleTimeout + '\'' +
+                ", flowName='" + flowName + '\'' +
+                ", inPort='" + inPort + '\'' +
+                ", instructionOrder='" + instructionOrder + '\'' +
+                ", actionOrder='" + actionOrder + '\'' +
+                ", outputNodeConnector='" + outputNodeConnector + '\'' +
+                '}';
     }
 }

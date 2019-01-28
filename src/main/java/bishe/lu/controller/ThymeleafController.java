@@ -20,6 +20,8 @@ public class ThymeleafController {
     public String center() {
         return "thymeleaf/center/center";
     }
+
+
 	
 //	@RequestMapping("test")
 //    public String test(ModelMap map) {

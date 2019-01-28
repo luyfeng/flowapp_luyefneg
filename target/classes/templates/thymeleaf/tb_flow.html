@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h2>ADDFLOW</h2>
+</div>
+<div>
+    <h2>Input Data In Form</h2>
+    <form name="Form" action="/flow/saveFlow" method="post">
+        <!--<%&#45;&#45;<input type="text" id="flowid">&#45;&#45;%>-->
+        <input type="text" id="flow_id" name="flowId" placeholder="flow_id">
+        <input type="text" id="priority" name="priority" placeholder="priority">
+        <input type="text" id="table_id" name="tableId" placeholder="table_id">
+        <input type="text" id="hard-timeout" name="hardTimeout" placeholder="hard-timeout">
+        <input type="text" id="idle-timeout" name="idleTimeout" placeholder="idle-timeout">
+        <input type="text" id="flow-name" name="flowName" placeholder="flow-name">
+        <input type="text" id="in-port" name="inPort"placeholder="in-port">
+        <input type="text" id="instruction-order" name="instructionOrder" placeholder="instruction-order">
+        <input type="text" id="action-order" name="actionOrder" placeholder="action-order">
+        <input type="text" id="output-node-connector" name="outputNodeConnector" placeholder="output-node-connector">
+        <!--<%&#45;&#45;<input type="button" id="submit-put" value="put">&#45;&#45;%>-->
+        <button type="submit" id="submit-put" value="put">put</button>
+    </form>
+</div>
+
+
+<div class="table-b">
+    <table style="border:1px solid">
+        <thead>
+        <tr >
+            <!--<th>id</th>-->
+            <th>flow_id</th>
+            <th>priority</th>
+            <th>table_id</th>
+            <th>hard-timeout</th>
+            <th>idle-timeout</th>
+            <th>flow-name</th>
+            <th>in-port</th>
+            <th>instruction-order</th>
+            <th>action-order</th>
+            <th>output-node-connector</th>
+            <th>operate</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tab:${flowList}">
+                <!--<td th:text="${tab.id}"></td>-->
+                <td th:text="${tab.flowId}"></td>
+                <td th:text="${tab.priority}"></td>
+                <td th:text="${tab.tableId}"></td>
+                <td th:text="${tab.hardTimeout}"></td>
+                <td th:text="${tab.idleTimeout}"></td>
+                <td th:text="${tab.flowName}"></td>
+                <td th:text="${tab.inPort}"></td>
+                <td th:text="${tab.instructionOrder}"></td>
+                <td th:text="${tab.actionOrder}"></td>
+                <td th:text="${tab.outputNodeConnector}"></td>
+                <td>
+                    <!--<a href="/flow/queryFlowById?id=${tab.id}" th:href="@{/flow/queryFlowById?id=${tab.id}" onclick="">修改</a>-->
+                    <a th:href="@{/flow/queryFlowById(id=${tab.id})}" onclick="">修改</a>
+                    <!--<a href="#" onclick="delTable('${tab.id}')" th:onclick="'javascript:delFlow('+${tab.id}+')'">删除</a>-->
+                    <a href="#" th:onclick="'javascript:delFlow('+${tab.id}+')'">删除</a>
+                    <a th:href="@{/flow/deleteFlow(id=${tab.id})}" >删除</a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<script src="/static/js/jquery-1.11.3.min.js"></script>
+<script src="/static/js/jquery-1.12.2.js"></script>
+<script src="/static/js/flow_script.js"></script>
+<script type="text/javascript">
+
+    //删除flow弹出对话框设置
+    // function delFlow(id) {
+    //     debugger;
+    //     var isDel = confirm("您确定要删除吗？Are you sure you want to delete it?");
+    //     debugger;
+    //     if(isDel){
+    //         debugger;
+    //         //要删除
+    //         window.location.href = "/flow/deleteFlow?id="+id;
+    //     }
+    // }
+
+</script>
+
+</body>
+
+</html>

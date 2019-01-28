@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@ControllerAdvice
+//@ControllerAdvice
 public class LuExceptionHandler {
 
 	public static final String IMOOC_ERROR_VIEW = "error";
@@ -26,7 +26,7 @@ public class LuExceptionHandler {
 //        return mav;
 //    }
 	
-	@ExceptionHandler(value = Exception.class)
+//	@ExceptionHandler(value = Exception.class)
     public Object errorHandler(HttpServletRequest reqest,
                                HttpServletResponse response, Exception e) throws Exception {
     	
