@@ -64,7 +64,6 @@ public class UserServiceImpl implements UserService {
             userModel.setEncrptPassword(userPasswordDO.getEncrptPassword());
         }
 
-
         return userModel;
     }
 }

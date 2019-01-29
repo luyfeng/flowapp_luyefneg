@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NodeConnector</title>
+</head>
+<body>
+
+<div>
+    <table style="border:1px solid">
+        <thead>
+        <tr >
+            <th>id</th>
+            <th>FlowNodeInventory_PortNumber</th>
+            <th>FlowNodeInventory_HardwareAddress</th>
+            <th>FlowNodeInventory_CurrentSpeed</th>
+            <th>FlowNodeInventory_Name</th>
+            <th>FlowNodeInventory_State</th>
+            <!--<th>operate</th>-->
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="node:${nodeConnectorList}">
+                <td th:text="${node.id}"></td>
+                <td th:text="${node.portNumber}"></td>
+                <td th:text="${node.hardwareAddress}"></td>
+                <td th:text="${node.currentSpeed}"></td>
+                <td th:text="${node.portName}"></td>
+                <td th:text="${node.portState}"></td>
+                <td>
+                    <!--<a href="#" onclick="editCustomer(${})">修改</a>-->
+                    <!--<a href="#" onclick="deleteCustomer(${})">删除</a>-->
+
+                    <!--<a href="/updateTableUIController?id=${node.id}" onclick="">修改</a>-->
+                    <!--<a href="#" onclick="delTable('${node.id}')">删除</a>-->
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

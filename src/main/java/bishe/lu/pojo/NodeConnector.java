@@ -105,4 +105,16 @@ public class NodeConnector {
     public void setPortState(Boolean portState) {
         this.portState = portState;
     }
+
+    @Override
+    public String toString() {
+        return "NodeConnector{" +
+                "id='" + id + '\'' +
+                ", portNumber='" + portNumber + '\'' +
+                ", hardwareAddress='" + hardwareAddress + '\'' +
+                ", currentSpeed='" + currentSpeed + '\'' +
+                ", portName='" + portName + '\'' +
+                ", portState=" + portState +
+                '}';
+    }
 }

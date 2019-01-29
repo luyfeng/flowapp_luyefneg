@@ -27,7 +27,7 @@ public class FlowController {
     @Autowired
     private Sid sid;
 
-    @RequestMapping("tb_flow")
+    @RequestMapping("/tb_flow")
     public String tb_flow(){
         return "thymeleaf/tb_flow";
     }
