@@ -41,13 +41,14 @@ public class NodeConnectorServiceImpl implements NodeConnectorService {
         List<NodeBean> nodeBeanList = nodesBean.getNode();
         for (NodeBean nodeBean : nodeBeanList){
             List<NodeConnectorBean> nodeConnectorBeanList = nodeBean.getNodeConnector();
+//            nodeConnector.setPortNumber(nodeBean.getFlowNodeInventory_IpAddress());
             for (NodeConnectorBean nodeConnectorBean : nodeConnectorBeanList){
                 nodeConnector.setId(nodeConnectorBean.getId());
                 nodeConnector.setPortNumber(nodeConnectorBean.getFlowNodeInventory_PortNumber());
                 nodeConnector.setHardwareAddress(nodeConnectorBean.getFlowNodeInventory_HardwareAddress());
                 nodeConnector.setCurrentSpeed(nodeConnectorBean.getFlowNodeInventory_CurrentSpeed());
                 nodeConnector.setPortName(nodeConnectorBean.getFlowNodeInventory_Name());
-                nodeConnector.setPortState(nodeConnectorBean.getFlowNodeInventory_State().isLive());
+//                nodeConnector.setPortState(nodeConnectorBean.getFlowNodeInventory_State().isLive());
                 nodeConnectorMapper.insert(nodeConnector);
             }
         }

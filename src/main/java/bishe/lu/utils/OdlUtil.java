@@ -10,6 +10,51 @@ public class OdlUtil {
         this.url = "http://" + host + ":" + port;
     }
 
+    /***
+     * getTpNodes
+     * @return
+     * 2019/01/30
+     */
+
+    public String getTpNodes() {
+        return getTpNodes("");
+    }
+
+    public String getTpNodes(String containerName){
+        return getTpNodes(containerName, "admin","admin");
+    }
+
+    public String getTpNodes(String containerName,String username,String password) {
+        HttpRequest.setBasicAuth(getBasicAuthStr(username,password));
+        String str = HttpRequest.sendGet(url + "/restconf/operational/network-topology:network-topology" + containerName,"");
+        return str;
+
+    }
+
+
+
+    /***
+     * getTpLinks
+     * @return
+     * 2019/01/30
+     */
+
+    public String getTpLinks() {
+        return getTpLinks("");
+    }
+
+    public String getTpLinks(String containerName){
+        return getTpLinks(containerName, "admin","admin");
+    }
+
+    public String getTpLinks(String containerName,String username,String password) {
+        HttpRequest.setBasicAuth(getBasicAuthStr(username,password));
+        String str = HttpRequest.sendGet(url + "/restconf/operational/network-topology:network-topology" + containerName,"");
+        return str;
+
+    }
+
+
 
     /***
      * getNodes

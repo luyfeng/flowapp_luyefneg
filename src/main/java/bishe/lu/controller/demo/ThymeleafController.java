@@ -1,4 +1,4 @@
-package bishe.lu.controller;
+package bishe.lu.controller.demo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -1,4 +1,4 @@
-package bishe.lu.controller;
+package bishe.lu.controller.demo;
 
 import bishe.lu.pojo.LuJSONResult;
 import bishe.lu.pojo.Resource;

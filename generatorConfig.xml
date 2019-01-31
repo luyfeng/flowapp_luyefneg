@@ -30,7 +30,9 @@
 
 
 		<!--<table tableName="node_connector"></table>-->
-		<table tableName="tb_flow"></table>
+		<!--<table tableName="tb_flow"></table>-->
+		<table tableName="tp_link"></table>
+		<table tableName="tp_node"></table>
 
     </context>
 </generatorConfiguration>
