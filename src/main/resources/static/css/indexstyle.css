@@ -1,0 +1,8 @@
+.table-b table{
+/*为表格设置合并边框模型:{border-collapse: collapse;}*/
+border-collapse: collapse;
+}
+
+.table-b table td, .table-b table th{
+    border:1px solid black;
+}

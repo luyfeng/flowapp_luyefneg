@@ -26,9 +26,6 @@ public class TpNodeServiceImpl implements TpNodeService {
         String str = null;
         str = odlUtil.getTpNodes();
 
-//        HostTrackerService_addressesBean hostTrackerService_addressesBean = new HostTrackerService_addressesBean();
-
-
         Gson gson = new Gson();
         //用gson把json字符串数据转化成javabean实体，数据存到NodesRootBean类中
         NetworkTopologyRootBean networkTopologyRootBean = gson.fromJson(str,NetworkTopologyRootBean.class);
@@ -39,9 +36,10 @@ public class TpNodeServiceImpl implements TpNodeService {
         for (TopologyBean topologyBean : topologyBeanList) {
             List<NodeTPBean> nodeTPBeanList = topologyBean.getNodeTPBeanList();
             for (NodeTPBean nodeTPBean : nodeTPBeanList) {
+                //把NetworkTopologyRootBean类的值赋给tpNode
                 tpNode.setNodeId(nodeTPBean.getNodeId());
                 tpNode.setTerminationPointTpId(nodeTPBean.getTerminationPointBeanList().get(0).getTpId());
-                //判断HostTrackerService_addressesBean时候存在
+                //判断HostTrackerService_addressesBean是否存在
                 if (nodeTPBean.getHostTrackerService_addressesBeanList() == null){
                     tpNode.setAddresseId("------");
                 }else {tpNode.setAddresseId(nodeTPBean.getHostTrackerService_addressesBeanList().get(0).getId());}
@@ -62,10 +60,13 @@ public class TpNodeServiceImpl implements TpNodeService {
                     tpNode.setIp(nodeTPBean.getHostTrackerService_addressesBeanList().get(0).getIp());
                 }else {tpNode.setIp("------");}
 
+                //判断hostTrackerServiceId是否存在
                 if (nodeTPBean.getHostTrackerServiceId() != null){
                     tpNode.setHostTrackerServiceId(nodeTPBean.getHostTrackerServiceId());
                 }else {tpNode.setHostTrackerServiceId("------");}
 
+
+                //判断hostTrackerService_attachmentPointsBean是否存在
                 if (nodeTPBean.getHostTrackerService_attachmentPointsBeanList() != null){
                     tpNode.setAttachmentPointTpId(nodeTPBean.getHostTrackerService_attachmentPointsBeanList().get(0).getTpId());
                 }else {tpNode.setAttachmentPointTpId("------");}
@@ -74,11 +75,12 @@ public class TpNodeServiceImpl implements TpNodeService {
                     tpNode.setCorrespondingTp(nodeTPBean.getHostTrackerService_attachmentPointsBeanList().get(0).getCorrespondingTp());
                 }else {tpNode.setCorrespondingTp("------");}
 
-
+                //判断hostTrackerService_attachmentPointsBean是否存在
                 if (nodeTPBean.getHostTrackerService_attachmentPointsBeanList() != null){
                     tpNode.setActive(nodeTPBean.getHostTrackerService_attachmentPointsBeanList().get(0).getActive());
                 }else {tpNode.setActive(null);}
 
+                //存入数据库
                 tpNodeMapper.insert(tpNode);
             }
         }

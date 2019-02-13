@@ -50,7 +50,7 @@ public class FlowController {
 
         //调转到列表页面
 //        return LuJSONResult.ok("ok");
-        return "redirect:/flow/queryFlowList";
+        return "redirect:/";
     }
     //2.查询所有flow
     @RequestMapping("/queryFlowList")

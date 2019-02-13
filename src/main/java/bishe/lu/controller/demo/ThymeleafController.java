@@ -10,13 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("th")
 public class ThymeleafController {
 
-	@RequestMapping("/index")
-    public String index(ModelMap map) {
+	@RequestMapping("/flowui")
+    public String flowui(ModelMap map) {
         map.addAttribute("name", "thymeleaf-lululu");
-        return "thymeleaf/index";
+        return "thymeleaf/flowui";
+    }
+
+    @RequestMapping("/echartdemo")
+    public String echartdemo() {
+	    return "thymeleaf/echartdemo";
+    }
+
+    @RequestMapping("/node_connector")
+    public String node_connector() {
+//	    return "thymeleaf/node_connector";
+        return "redirect:/nodeConnector/queryNodeConnectorList";
     }
 	
-	@RequestMapping("center")
+	@RequestMapping("/center")
     public String center() {
         return "thymeleaf/center/center";
     }

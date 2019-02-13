@@ -41,7 +41,7 @@ public class NodeConnectorController {
         NodeConnector nodeConnector = new NodeConnector();
         List<NodeConnector> nodeConnectorList = nodeConnectorService.queryNodeConnectorList(nodeConnector);
         map.addAttribute("nodeConnectorList",nodeConnectorList);
-        return "thymeleaf/tb_nodeConnector";
+        return "thymeleaf/node_connector";
     }
 
 
