@@ -19,6 +19,29 @@ public class TbFlowServiceImpl implements TbFlowService {
     private TbFlowMapperList tbFlowMapperList;
 
     @Override
+    public List<TbFlow> selectFlowListByQueryVo(TbFlow flow) {
+
+        if (null != flow) {
+           if (null != flow.getFlowId() && !"".equals(flow.getFlowId().trim())){
+               flow.setFlowId(flow.getFlowId().trim());
+           }
+           if (null != flow.getTableId() && !"".equals(flow.getTableId().trim())){
+                flow.setTableId(flow.getTableId().trim());
+           }
+           if (null != flow.getInPort() && !"".equals(flow.getInPort().trim())){
+                flow.setInPort(flow.getInPort().trim());
+           }
+           if (null != flow.getOutputNodeConnector() && !"".equals(flow.getOutputNodeConnector().trim())){
+                flow.setOutputNodeConnector(flow.getOutputNodeConnector().trim());
+           }
+        }
+        List<TbFlow> flowList = tbFlowMapper.selectFlowListByQueryVo(flow);
+        return flowList;
+
+
+    }
+
+    @Override
     public void saveTbFlow(TbFlow flow) throws Exception {
         tbFlowMapper.insert(flow);
     }

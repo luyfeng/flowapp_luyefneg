@@ -218,125 +218,14 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">设备信息</h1>
+                <h1 class="page-header">TOPO</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Node</div>
-                    <!-- /.panel-heading -->
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>FlowNodeInventory_PortNumber</th>
-                            <th>FlowNodeInventory_HardwareAddress</th>
-                            <th>FlowNodeInventory_CurrentSpeed</th>
-                            <th>FlowNodeInventory_Name</th>
-                            <th>FlowNodeInventory_State</th>
-                            <!--<th>operate</th>-->
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!--<tr>-->
-                        <tr th:each="node:${nodeConnectorList}">
-                            <td th:text="${node.id}"></td>
-                            <td th:text="${node.portNumber}"></td>
-                            <td th:text="${node.hardwareAddress}"></td>
-                            <td th:text="${node.currentSpeed}"></td>
-                            <td th:text="${node.portName}"></td>
-                            <td th:text="${node.portState}"></td>
-
-                        </tr>
-                            <!--<td>-->
-                                <!--<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCustomer(${row.cust_id})">modify</a>-->
-                                <!--<a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer(${row.cust_id})">delete</a>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        </tbody>
-                    </table>
-                    <div class="col-md-12 text-right">
-                        <itheima:page url="${pageContext.request.contextPath }/customer/list.action" />
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Link</div>
-                    <!-- /.panel-heading -->
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>linkId</th>
-                            <th>destNode</th>
-                            <th>destTp</th>
-                            <th>sourceTp</th>
-                            <th>sourceNode</th>
-                            <!--<th>operate</th>-->
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="tplink:${tplinkList}">
-                            <td th:text="${tplink.linkId}"></td>
-                            <td th:text="${tplink.destNode}"></td>
-                            <td th:text="${tplink.destTp}"></td>
-                            <td th:text="${tplink.sourceTp}"></td>
-                            <td th:text="${tplink.sourceNode}"></td>
-
-                        </tr>
-
-                        </tbody>
-                    </table>
-                    <div class="col-md-12 text-right">
-                        <!--<itheima:page url="${pageContext.request.contextPath }/customer/list.action" />-->
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">TpNode</div>
-                    <!-- /.panel-heading -->
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>nodeId</th>
-                            <th>terminationPointTpId</th>
-                            <th>addresseId</th>
-                            <th>firstSeen</th>
-                            <th>mac</th>
-                            <th>lastSeen</th>
-                            <th>ip</th>
-                            <th>hostTrackerServiceId</th>
-                            <th>attachmentPointTpId</th>
-                            <th>correspondingTp</th>
-                            <th>active</th>
-                            <!--<th>operate</th>-->
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="tpnode:${tpNodeList}">
-                            <td th:text="${tpnode.nodeId}"></td>
-                            <td th:text="${tpnode.terminationPointTpId}"></td>
-                            <td th:text="${tpnode.addresseId}"></td>
-                            <td th:text="${tpnode.firstSeen}"></td>
-                            <td th:text="${tpnode.mac}"></td>
-                            <td th:text="${tpnode.lastSeen}"></td>
-                            <td th:text="${tpnode.ip}"></td>
-                            <td th:text="${tpnode.hostTrackerServiceId}"></td>
-                            <td th:text="${tpnode.attachmentPointTpId}"></td>
-                            <td th:text="${tpnode.correspondingTp}"></td>
-                            <td th:text="${tpnode.active}"></td>
-
-                        </tr>
-
-                        </tbody>
-                    </table>
-                    <div class="col-md-12 text-right">
-                        <!--<itheima:page url="${pageContext.request.contextPath }/customer/list.action" />-->
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
+                <div id="main" style="width: 600px;height: 400px;"></div>
                 <!-- /.panel -->
             </div>
             <!-- /.col-lg-12 -->
@@ -362,6 +251,80 @@
 <!-- Custom Theme JavaScript -->
 <script src="/static/js/sb-admin-2.js"></script>
 
+<script src="/static/js/echarts.min.js"></script>
+
+<script type="text/javascript">
+    //基于准备好的dom,初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    //指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '简单网络拓扑'
+        },
+        tooltip: {},
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        series: [{
+            type: 'graph',
+            layout: 'none',
+            symbolSize: 50,
+            roam: true,
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [4, 10],
+            edgeLabel: {
+                normal: {
+                    textStyle: {
+                        fontSize: 20
+                    }
+                }
+            },
+            data: [{
+                name: '主机1',
+                x: 100,
+                y: 100
+            }, {
+                name: '主机2',
+                x: 220,
+                y: 310
+            }, {
+                name: '交换机s1',
+                x: 100,
+                y: 200
+            }, {
+                name: '主机4',
+                x: 10,
+                y: 300
+            }],
+            // links: [],
+            links: [{
+                source: '交换机s1',
+                target: '主机1'
+            }, {
+                source: '交换机s1',
+                target: '主机2'
+            }, {
+                source: '交换机s1',
+                target: '主机4'
+            }],
+            lineStyle: {
+                normal: {
+                    opacity: 0.9,
+                    width: 2,
+                    curveness: 0
+                }
+            }
+        }]
+    };
+
+    //使用刚指定的配置项和数据显示图表.
+    myChart.setOption(option);
+</script>
 
 </body>
 </html>

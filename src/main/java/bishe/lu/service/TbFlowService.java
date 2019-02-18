@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TbFlowService {
 
+    public List<TbFlow> selectFlowListByQueryVo(TbFlow flow);
+
     public void saveTbFlow(TbFlow flow) throws Exception;
 
     public void updateTbFlow(TbFlow flow);

@@ -1,7 +1,11 @@
 package bishe.lu.controller;
 
 import bishe.lu.pojo.NodeConnector;
+import bishe.lu.pojo.TpLink;
+import bishe.lu.pojo.TpNode;
 import bishe.lu.service.NodeConnectorService;
+import bishe.lu.service.TpLinkService;
+import bishe.lu.service.TpNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +22,12 @@ public class NodeConnectorController {
 
     @Autowired
     private NodeConnectorService nodeConnectorService;
+
+    @Autowired
+    private TpLinkService tpLinkService;
+
+    @Autowired
+    private TpNodeService tpNodeService;
 
     //添加node
     @RequestMapping("/saveNodeConnector")
@@ -41,6 +51,17 @@ public class NodeConnectorController {
         NodeConnector nodeConnector = new NodeConnector();
         List<NodeConnector> nodeConnectorList = nodeConnectorService.queryNodeConnectorList(nodeConnector);
         map.addAttribute("nodeConnectorList",nodeConnectorList);
+
+        //查询所有TPlink
+        TpLink link = new TpLink();
+        List<TpLink> tplinkList = tpLinkService.queryTpLinkList(link);
+        map.addAttribute("tplinkList",tplinkList);
+
+        //查询所有增加TPnode
+        TpNode tpNode = new TpNode();
+        List<TpNode> tpNodeList = tpNodeService.queryTpNodeList(tpNode);
+        map.addAttribute("tpNodeList", tpNodeList);
+
         return "thymeleaf/node_connector";
     }
 

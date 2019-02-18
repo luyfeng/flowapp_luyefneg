@@ -54,6 +54,8 @@ public class TpLinkServiceImpl implements TpLinkService {
 
     @Override
     public List<TpLink> queryTpLinkList(TpLink tpLink) {
-        return null;
+        List<TpLink> tplinkList = tpLinkMapper.select(tpLink);
+
+        return tplinkList;
     }
 }

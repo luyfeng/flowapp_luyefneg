@@ -180,11 +180,11 @@
                         </div> <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="#" class="active">
+                        <a href="/th/flowui" class="active">
                             <i class="fa fa-edit fa-fw"></i> flowui
                         </a>
                     </li>
-                    <li><a href="salevisit.action">
+                    <li><a href="/th/echartdemo_topo">
                             <i class="fa fa-dashboard fa-fw"></i> topoui
                         </a>
                     </li>
@@ -218,47 +218,71 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Controller</h1>
+                <h1 class="page-header">Controller
+                    <div class="text-right" style="float: right">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#flowAddDialog">添加流表</button>
+                    </div>
+                </h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
         <div class="panel panel-default">
             <div class="panel-body">
-                <form class="form-inline" action="/customer/list.action" method="post">
+                <form class="form-inline" action="/flow/queryFlowList" method="post">
+                    <!--<div class="form-group">-->
+                        <!--<label for="">nodeid</label>-->
+                        <!--<input type="text" class="form-control" id="nodeid" value="" name="nodeid">-->
+                    <!--</div>-->
+
                     <div class="form-group">
-                        <label for="customerName">nodeid</label>
-                        <input type="text" class="form-control" id="nodeid" value="${custName }" name="custName">
-                    </div>
-                    <div class="form-group">
-                        <label for="customerFrom">tableid</label>
-                        <select	class="form-control" id="customerFrom" placeholder="客户来源" name="custSource">
+                        <label for="custIndustry">flowId</label>
+                        <select	class="form-control" id="custIndustry" placeholder="" name="flowId">
                             <option value="">--请选择--</option>
-                            <c:forEach items="${fromType}" var="item">
-                                <option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>
-                            </c:forEach>
+                            <i th:each="tab:${flowList}">
+                                <option th:value="${tab.flowId}" th:text="${tab.flowId}" th:selected="${tab.flowId eq flowId}"></option>
+                                <!--<option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>-->
+                            </i>
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="custIndustry">flowid</label>
-                        <select	class="form-control" id="custIndustry"  name="custIndustry">
+                        <label for="customerFrom">tableId</label>
+                        <select	class="form-control" id="customerFrom" placeholder="" name="tableId">
                             <option value="">--请选择--</option>
-                            <c:forEach items="${industryType}" var="item">
-                                <option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>
-                            </c:forEach>
+                            <i th:each="tab:${flowList}">
+                                <option th:value="${tab.tableId}" th:text="${tab.tableId}" th:selected="${tab.tableId eq tableId}"></option>
+                                <!--<option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>-->
+                            </i>
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="custLevel">xxx</label>
-                        <select	class="form-control" id="custLevel" name="custLevel">
+                        <label for="custLevel">inPort</label>
+                        <select	class="form-control" id="custLevel" name="inPort">
                             <option value="">--请选择--</option>
-                            <c:forEach items="${levelType}" var="item">
-                                <option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-                            </c:forEach>
+
+                            <i th:each="tab:${flowList}">
+                                <option th:value="${tab.inPort}" th:text="${tab.inPort}" th:selected="${tab.inPort eq inPort}"></option>
+                            </i>
+                            <!--<c:forEach items="${levelType}" var="item">-->
+                                <!--<option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>-->
+                            <!--</c:forEach>-->
 
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">put</button>
+
+                    <div class="form-group">
+                        <label for="outputNodeConnector_q">outputNodeConnector</label>
+                        <select	class="form-control" id="outputNodeConnector_q" name="outputNodeConnector">
+                            <option value="">--请选择--</option>
+                            <i th:each="tab:${flowList}">
+                                <option th:value="${tab.outputNodeConnector}" th:text="${tab.outputNodeConnector}" th:selected="${tab.outputNodeConnector eq outputNodeConnector}"></option>
+                            </i>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
         </div>
@@ -270,34 +294,47 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>flow_id</th>
                             <th>priority</th>
+                            <th>table_id</th>
                             <th>hard-timeout</th>
                             <th>idle-timeout</th>
                             <th>flow-name</th>
                             <th>in-port</th>
+                            <th>instruction-order</th>
+                            <th>action-order</th>
                             <th>output-node-connector</th>
                             <th>operate</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>${row.cust_id}</td>
-                                <td>${row.cust_name}</td>
-                                <td>${row.cust_source}</td>
-                                <td>${row.cust_industry}</td>
-                                <td>${row.cust_level}</td>
-                                <td>${row.cust_phone}</td>
-                                <td>${row.cust_mobile}</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCustomer(${row.cust_id})">modify</a>
-                                    <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer(${row.cust_id})">delete</a>
-                                </td>
-                            </tr>
+                        <tr th:each="tab:${flowList1}">
+                            <!--<td th:text="${tab.id}"></td>-->
+                            <td th:text="${tab.flowId}" th:id="${tab.flowId}"></td>
+                            <td th:text="${tab.priority}"></td>
+                            <td th:text="${tab.tableId}"></td>
+                            <td th:text="${tab.hardTimeout}"></td>
+                            <td th:text="${tab.idleTimeout}"></td>
+                            <td th:text="${tab.flowName}"></td>
+                            <td th:text="${tab.inPort}"></td>
+                            <td th:text="${tab.instructionOrder}"></td>
+                            <td th:text="${tab.actionOrder}"></td>
+                            <td th:text="${tab.outputNodeConnector}"></td>
+                            <td>
+                                <!--<a th:href="@{/flow/queryFlowById(id=${tab.id})}" class="btn btn-primary btn-xs" data-toggle="modal"-->
+                                   <!--data-target="#customerEditDialog" onclick="editCustomer(${row.cust_id})">修改</a>-->
+                                <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                   data-target="#customerEditDialog" th:onclick="'javascript:editFlow(\''+${tab.id}+'\')' ">流表操作</a>
+                                <!--<a th:href="@{/flow/queryFlowById(id=${tab.id})}" onclick="">修改</a>-->
+                                <a class="btn btn-danger btn-xs"
+                                   th:onclick="'javascript:deleteFlow(\''+${tab.id}+'\')' ">删除数据</a>
+                                <!--<a th:href="@{/flow/deleteFlow(id=${tab.id})}" >删除</a>-->
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                     <div class="col-md-12 text-right">
-                        <itheima:page url="${pageContext.request.contextPath }/customer/list.action" />
+                        <!--<itheima:page url="${pageContext.request.contextPath }/customer/list.action" />-->
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -309,6 +346,191 @@
     <!-- /#page-wrapper -->
 
 </div>
+
+<!--修改流表-->
+<div class="modal fade" id="customerEditDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">修改flow信息</h4>
+            </div>
+            <!--<div class="modal-body" th:object="${flowById}">-->
+            <div class="modal-body" >
+                <form class="form-horizontal" id="edit_flow_form" name="Form" action="/flow/updateFlow" method="post">
+                    <!--<input type="hidden" id="edit_cust_id" name="cust_id"/>-->
+                    <input type="hidden" id="id" name="id" placeholder="id">
+                    <input type="hidden" id="flowId" name="flowId"  placeholder="flow_id">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">priority</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="priority" name="priority"  placeholder="priority">
+                            <!--<input type="text"  id="edit_customerName" placeholder="priority" name="cust_name">-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">table_id</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="tableId" name="tableId" placeholder="table_id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">hard-timeout</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="hardTimeout" name="hardTimeout"  placeholder="hard-timeout">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">idle-timeout</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="idleTimeout" name="idleTimeout"  placeholder="idle-timeout">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">flow-name</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="flowName" name="flowName"  placeholder="flow-name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">in-port</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="inPort" name="inPort" placeholder="in-port">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">instruction-order</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="instructionOrder" name="instructionOrder" placeholder="instruction-order">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">action-order</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="actionOrder" name="actionOrder" placeholder="action-order">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">output-node-connector</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="outputNodeConnector" name="outputNodeConnector" placeholder="output-node-connector">
+                        </div>
+                    </div>
+                    <!--<button type="submit" id="submit-put" value="put">put</button>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存修改</button>-->
+                <button type="button" class="btn btn-primary" onclick="updateFlow()">保存修改</button>
+                <button type="button" class="btn btn-primary" onclick="delFlow()">删除流表</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--添加流表-->
+<div class="modal fade" id="flowAddDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">修改flow信息</h4>
+            </div>
+            <!--<div class="modal-body" th:object="${flowById}">-->
+            <div class="modal-body" >
+                <form class="form-horizontal" id="add_flow_form" name="Form" action="/flow/updateFlow" method="post">
+                    <!--<input type="hidden" id="edit_cust_id" name="cust_id"/>-->
+                    <!--<input type="hidden" id="id" name="id" placeholder="id">-->
+                    <!--<input type="hidden" id="flowId" name="flowId"  placeholder="flow_id">-->
+
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label">priority</label>-->
+                        <!--<div class="col-sm-2">-->
+                            <!--<input type="text" class="form-control" id="add_id" name="id"  placeholder="id">-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">flow_id</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_flowId" name="flowId"  placeholder="flow_id">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">priority</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_priority" name="priority"  placeholder="priority">
+                            <!--<input type="text"  id="edit_customerName" placeholder="priority" name="cust_name">-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">table_id</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_tableId" name="tableId" placeholder="table_id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">hard-timeout</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_hardTimeout" name="hardTimeout"  placeholder="hard-timeout">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">idle-timeout</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_idleTimeout" name="idleTimeout"  placeholder="idle-timeout">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">flow-name</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_flowName" name="flowName"  placeholder="flow-name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">in-port</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_inPort" name="inPort" placeholder="in-port">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">instruction-order</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_instructionOrder" name="instructionOrder" placeholder="instruction-order">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">action-order</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_actionOrder" name="actionOrder" placeholder="action-order">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">output-node-connector</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="add_outputNodeConnector" name="outputNodeConnector" placeholder="output-node-connector">
+                        </div>
+                    </div>
+                    <!--<button type="submit" id="submit-put" value="put">put</button>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存修改</button>-->
+                <button type="button" class="btn btn-primary" onclick="addFlow()">下发流表</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- jQuery -->
 <script src="/static/js/jquery.min.js"></script>
@@ -326,6 +548,308 @@
 <!-- Custom Theme JavaScript -->
 <script src="/static/js/sb-admin-2.js"></script>
 
+<script>
+    function editFlow(id) {
+        $.ajax({
+            type : "get",
+            url : "/flow/queryFlowById",
+            data:{"id":id},
+            success:function (result) {
+                // alert(result.data.id);
+                $("#id").val(result.data.id);
+                $("#flowId").val(result.data.flowId);
+                $("#priority").val(result.data.priority);
+                $("#tableId").val(result.data.tableId);
+                $("#hardTimeout").val(result.data.hardTimeout);
+                $("#idleTimeout").val(result.data.idleTimeout);
+                $("#flowName").val(result.data.flowName);
+                $("#inPort").val(result.data.inPort);
+                $("#instructionOrder").val(result.data.instructionOrder);
+                $("#actionOrder").val(result.data.actionOrder);
+                $("#outputNodeConnector").val(result.data.outputNodeConnector);
+
+
+
+            }
+        })
+    }
+
+    function updateFlow() {
+
+        //*********************************************流表操作*改********************************************************
+
+            var flow_id = $("#flowId");
+            var priority = $("#priority");
+            var table_id = $("#tableId");
+            var hard_timeout = $("#hardTimeout");
+            var idle_timeout = $("#idleTimeout")
+            var flow_name = $("#flowName")
+            var in_port = $("#inPort")
+            var instruction_order = $("#instructionOrder")
+            var action_order = $("#actionOrder")
+            var output_node_connector = $("#outputNodeConnector")
+
+            var data = {
+                "flow": [
+                    {
+                        "id": flow_id.val().trim(),
+                        "priority": priority.val().trim(),
+                        "table_id": table_id.val().trim(),
+                        "hard-timeout": hard_timeout.val().trim(),
+                        "idle-timeout": idle_timeout.val().trim(),
+                        "flow-name": flow_name.val().trim(),
+                        "match": {
+                            "in-port": in_port.val().trim()
+                        },
+                        "instructions": {
+                            "instruction": [
+                                {
+                                    "order": instruction_order.val().trim(),
+                                    "apply-actions": {
+                                        "action": [
+                                            {
+                                                "order": action_order.val().trim(),
+                                                "output-action": {
+                                                    "output-node-connector": output_node_connector.val().trim()
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+
+            };
+
+            $.ajax({
+                url: "http://10.1.11.26:8181/restconf/config/opendaylight-inventory:" +
+                    "nodes/node/openflow:1/flow-node-inventory:table/0/flow/"+flow_id.val().trim(),
+                type: "put",
+                async: true,
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                data: JSON.stringify(data),
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader("Authorization",
+                        //"Basic " + encodeBase64(username + ":" + password));
+                        "Basic YWRtaW46YWRtaW4=");
+                },
+                success: function(data) {
+                    alert("addflow success!")
+                },
+                error: function() {
+                    alert("addflow fail!")
+                }
+            });
+
+
+        //******************************************************************************************************
+
+        $.ajax({
+            type : "post",
+            url : "/flow/updateFlow",
+            data : $("#edit_flow_form").serialize(),
+            success : function (result) {
+                alert("flow更新成功！");
+                window.location.reload();
+            }
+        })
+    }
+    
+    function deleteFlow(id) {
+
+        //************************************************流表操作*删除*****************************************************
+
+
+
+        //************************************************流表操作******************************************************
+
+
+        if (confirm('确定要删除该流表?')) {
+            $.ajax({
+                type : "post",
+                url : "/flow/deleteFlow",
+                data : {"id" : id},
+                success : function (result) {
+                    alert("流表删除成功！");
+                    window.location.reload();
+                }
+            })
+        }
+    }
+
+    function delFlow() {
+        var id = $("#id").val();
+        // alert(id);
+
+        //*********************************************流表操作*删********************************************************
+
+        var flow_id = $("#flowId");
+        var priority = $("#priority");
+        var table_id = $("#tableId");
+        var hard_timeout = $("#hardTimeout");
+        var idle_timeout = $("#idleTimeout")
+        var flow_name = $("#flowName")
+        var in_port = $("#inPort")
+        var instruction_order = $("#instructionOrder")
+        var action_order = $("#actionOrder")
+        var output_node_connector = $("#outputNodeConnector")
+
+        var data = {
+            "flow": [
+                {
+                    "id": flow_id.val().trim(),
+                    "priority": priority.val().trim(),
+                    "table_id": table_id.val().trim(),
+                    "hard-timeout": hard_timeout.val().trim(),
+                    "idle-timeout": idle_timeout.val().trim(),
+                    "flow-name": flow_name.val().trim(),
+                    "match": {
+                        "in-port": in_port.val().trim()
+                    },
+                    "instructions": {
+                        "instruction": [
+                            {
+                                "order": instruction_order.val().trim(),
+                                "apply-actions": {
+                                    "action": [
+                                        {
+                                            "order": action_order.val().trim(),
+                                            "output-action": {
+                                                "output-node-connector": output_node_connector.val().trim()
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+
+        };
+
+        // $.ajax({
+        //     url: "http://10.1.11.26:8181/restconf/config/opendaylight-inventory:" +
+        //         "nodes/node/openflow:1/flow-node-inventory:table/0/flow/"+flow_id.val().trim(),
+        //     type: "put",
+        //     async: true,
+        //     contentType: 'application/json; charset=utf-8',
+        //     dataType: "json",
+        //     data: JSON.stringify(data),
+        //     beforeSend: function(xhr){
+        //         xhr.setRequestHeader("Authorization",
+        //             //"Basic " + encodeBase64(username + ":" + password));
+        //             "Basic YWRtaW46YWRtaW4=");
+        //     },
+        //     success: function(data) {
+        //         alert("addflow success!")
+        //     },
+        //     error: function() {
+        //         alert("addflow fail!")
+        //     }
+        // });
+
+
+        //******************************************************************************************************
+
+        if (confirm('确定要删除该流表?')) {
+            $.ajax({
+                type : "post",
+                url : "/flow/deleteFlow",
+                data : {"id" : id},
+                success : function (result) {
+                    alert("流表删除成功！");
+                    window.location.reload();
+                }
+            })
+        }
+
+    }
+
+    function addFlow() {
+        $.ajax({
+            type : "post",
+            async: true,
+            url : "/flow/saveFlow",
+            data : $("#add_flow_form").serialize(),
+            success : function (result) {
+
+                var flow_id = $("#add_flowId");
+                var priority = $("#add_priority");
+                var table_id = $("#add_tableId");
+                var hard_timeout = $("#add_hardTimeout");
+                var idle_timeout = $("#add_idleTimeout")
+                var flow_name = $("#add_flowName")
+                var in_port = $("#add_inPort")
+                var instruction_order = $("#add_instructionOrder")
+                var action_order = $("#add_actionOrder")
+                var output_node_connector = $("#add_outputNodeConnector")
+
+                // alert("output_node_connector="+output_node_connector.val()+", action_order="+action_order.val()+", instruction_order="+instruction_order.val()+", in_port="+in_port.val());
+
+                var data = {
+                    "flow": [
+                        {
+                            "id": flow_id.val().trim(),
+                            "priority": priority.val().trim(),
+                            "table_id": table_id.val().trim(),
+                            "hard-timeout": hard_timeout.val().trim(),
+                            "idle-timeout": idle_timeout.val().trim(),
+                            "flow-name": flow_name.val().trim(),
+                            "match": {
+                                "in-port": in_port.val().trim()
+                            },
+                            "instructions": {
+                                "instruction": [
+                                    {
+                                        "order": instruction_order.val().trim(),
+                                        "apply-actions": {
+                                            "action": [
+                                                {
+                                                    "order": action_order.val().trim(),
+                                                    "output-action": {
+                                                        "output-node-connector": output_node_connector.val().trim()
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+
+                };
+
+                // $.ajax({
+                //     url: "http://10.1.11.26:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/flow-node-inventory:table/0/flow/"+flow_id.val().trim(),
+                //     type: "put",
+                //     async: false,
+                //     contentType: 'application/json; charset=utf-8',
+                //     dataType: "json",
+                //     data: JSON.stringify(data),
+                //     beforeSend: function(xhr){
+                //         xhr.setRequestHeader("Authorization",
+                //             //"Basic " + encodeBase64(username + ":" + password));
+                //             "Basic YWRtaW46YWRtaW4=");
+                //     },
+                //     success: function(data) {
+                //         alert("addflow success!")
+                //     },
+                //     error: function() {
+                //         alert("addflow fail!")
+                //     }
+                // });
+
+                alert("flow保存成功！");
+                window.location.reload();
+            }
+        })
+    }
+</script>
 
 </body>
 </html>

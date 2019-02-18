@@ -17,4 +17,32 @@
     <result column="action_order" jdbcType="VARCHAR" property="actionOrder" />
     <result column="output_node_connector" jdbcType="VARCHAR" property="outputNodeConnector" />
   </resultMap>
+
+  <sql id="Base_Column_List">
+
+    id, flow_id, priority, table_id, hard_timeout, idle_timeout, flow_name, in_port, instruction_order, action_order, output_node_connector
+  </sql>
+
+  <select id="selectFlowListByQueryVo" parameterType="TbFlow" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from tb_flow
+    <where>
+      <if test="flowId != null and flowId != ''">
+        flow_id = #{flowId}
+      </if>
+      <if test="tableId != null and tableId != ''">
+        and table_id = #{tableId}
+      </if>
+      <if test="inPort != null and inPort != ''">
+        and in_port = #{inPort}
+      </if>
+      <if test="outputNodeConnector != null and outputNodeConnector != ''">
+        and output_node_connector = #{outputNodeConnector}
+      </if>
+    </where>
+
+  </select>
+
 </mapper>

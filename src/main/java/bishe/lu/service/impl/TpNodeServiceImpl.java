@@ -91,6 +91,8 @@ public class TpNodeServiceImpl implements TpNodeService {
 
     @Override
     public List<TpNode> queryTpNodeList(TpNode tpNode) {
-        return null;
+        List<TpNode> tpNodeList = tpNodeMapper.select(tpNode);
+
+        return tpNodeList;
     }
 }

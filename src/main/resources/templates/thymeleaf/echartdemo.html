@@ -184,12 +184,12 @@
                             <i class="fa fa-edit fa-fw"></i> flowui
                         </a>
                     </li>
-                    <li><a href="#">
+                    <li><a href="/th/echartdemo_topo">
                         <i class="fa fa-dashboard fa-fw"></i> topoui
                     </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/th/echartdemo">
                             <i class="fa fa-line-chart fa-fw" ></i>实时流量
                         </a>
                     </li>
@@ -225,56 +225,118 @@
         <!-- /.row -->
         <div class="panel panel-default">
             <div class="panel-body">
-                <form class="form-inline" action="/customer/list.action" method="post">
-                    <div class="form-group">
-                        <label for="customerName">nodeid</label>
-                        <input type="text" class="form-control" id="nodeid" value="${custName }" name="custName">
-                    </div>
-                    <div class="form-group">
-                        <label for="customerFrom">tableid</label>
-                        <select	class="form-control" id="customerFrom" placeholder="客户来源" name="custSource">
-                            <option value="">--请选择--</option>
-                            <c:forEach items="${fromType}" var="item">
-                                <option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="custIndustry">flowid</label>
-                        <select	class="form-control" id="custIndustry"  name="custIndustry">
-                            <option value="">--请选择--</option>
-                            <c:forEach items="${industryType}" var="item">
-                                <option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="custLevel">xxx</label>
-                        <select	class="form-control" id="custLevel" name="custLevel">
-                            <option value="">--请选择--</option>
-                            <c:forEach items="${levelType}" var="item">
-                                <option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-                            </c:forEach>
+                <!--<form class="form-inline" action="/customer/list.action" method="post">-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="customerName">nodeid</label>-->
+                        <!--<input type="text" class="form-control" id="nodeid" value="${custName }" name="custName">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="customerFrom">tableid</label>-->
+                        <!--<select	class="form-control" id="customerFrom" placeholder="客户来源" name="custSource">-->
+                            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                            <!--<c:forEach items="${fromType}" var="item">-->
+                                <!--<option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>-->
+                            <!--</c:forEach>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="custIndustry">flowid</label>-->
+                        <!--<select	class="form-control" id="custIndustry"  name="custIndustry">-->
+                            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                            <!--<c:forEach items="${industryType}" var="item">-->
+                                <!--<option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>-->
+                            <!--</c:forEach>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="custLevel">xxx</label>-->
+                        <!--<select	class="form-control" id="custLevel" name="custLevel">-->
+                            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                            <!--<c:forEach items="${levelType}" var="item">-->
+                                <!--<option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>-->
+                            <!--</c:forEach>-->
 
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">put</button>
-                </form>
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<button type="submit" class="btn btn-primary">put</button>-->
+                <!--</form>-->
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
+        <!--<div class="row">-->
+        <div >
+            <!--<div class="col-lg-12">-->
+            <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">ifinpkts</div>
                     <!-- /.panel-heading -->
-                    <div style="height: 600px;width: 1000px;">
+                    <div style="height: 250px;width: 500px;">
                         <div style="height: 100%; margin: 0">
                             <div id="main" style="height: 100%"></div>
+                            <p id="ifinpkts" class="text-right"></p>
+
+                        </div>
+                    </div>
+                    <div style="height: 250px;width: 500px;">
+                        <div style="height: 100%; margin: 0">
+                            <div id="main_s1_eth1_ifinpkts" style="height: 100%"></div>
+                            <p id="html_s1_eth1_ifinpkts" class="text-right"></p>
+                        </div>
+                    </div>
+                    <div style="height: 250px;width: 500px;">
+                        <div style="height: 100%; margin: 0">
+                            <div id="main_s1_eth2_ifinpkts" style="height: 100%"></div>
+                            <p id="html_s1_eth2_ifinpkts" class="text-right"></p>
+                        </div>
+                    </div>
+                    <!--<div class="col-md-12 text-right">-->
+                        <!--&lt;!&ndash;<div id="ifinpkts" style="height: 100%"></div>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">ifinoctets</div>
+
+                    <div style="height: 250px;width: 500px;">
+                        <div style="height: 100%; margin: 0">
+                            <div id="main1" style="height: 100%"></div>
                         </div>
                     </div>
                     <div class="col-md-12 text-right">
-                        <div id="aa" style="height: 100%"></div>
+                        <div id="ifinoctets" style="height: 100%"></div>
                     </div>
+
+                </div>
+                <!-- /.panel -->
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">ifoutpkts</div>
+
+                    <div style="height: 250px;width: 500px;">
+                        <div style="height: 100%; margin: 0">
+                            <div id="main2" style="height: 100%"></div>
+                            <p id="ifoutpkts" class="text-right"></p>
+                        </div>
+                    </div>
+                    <div style="height: 250px;width: 500px;">
+                        <div style="height: 100%; margin: 0">
+                            <div id="main_s1_eth1_ifoutpkts" style="height: 100%"></div>
+                            <p id="html_s1_eth1_ifoutpkts" class="text-right"></p>
+                        </div>
+                    </div>
+                    <div style="height: 250px;width: 500px;">
+                        <div style="height: 100%; margin: 0">
+                            <div id="main_s1_eth2_ifoutpkts" style="height: 100%"></div>
+                            <p id="html_s1_eth2_ifoutpkts" class="text-right"></p>
+                        </div>
+                    </div>
+
+                    <!--<div class="col-md-12 text-right">-->
+                        <!--<div id="ifoutpkts" style="height: 100%"></div>-->
+                    <!--</div>-->
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
@@ -282,9 +344,6 @@
             <!-- /.col-lg-12 -->
         </div>
     </div>
-
-
-
 
 </div>
 
@@ -306,15 +365,23 @@
 
 <script src="/static/js/echarts.min.js"></script>
 
+<!--//http://10.211.55.9:8008/metric/ALL/ifinpkts/json-->
 <script>
-    var myChart = echarts.init(document.getElementById('main'));
+    var myChart_ifinpkts = echarts.init(document.getElementById('main'));
+    var myChart_s1_eth1_ifinpkts = echarts.init(document.getElementById('main_s1_eth1_ifinpkts'));
+    var myChart_s1_eth2_ifinpkts = echarts.init(document.getElementById('main_s1_eth2_ifinpkts'));
 
     var data = [];
+    var data_s1_eth1_ifinpkts = [];
+    var data_s1_eth2_ifinpkts = [];
 
-    for (var i = 1; i < 100; i++) {
-        data.push(0)
+    for (var i = 1; i < 50; i++) {
+        data.push(0);
+        data_s1_eth1_ifinpkts.push(0);
+        data_s1_eth2_ifinpkts.push(0);
 
     }
+
 
     option = {
         xAxis: {
@@ -332,10 +399,11 @@
             areaStyle: {
                 normal: {}
             },
-            data: data
+            data: []
         }]
     };
 
+    //http://10.211.55.9:8008/metric/ALL/ifinpkts/json
     setInterval(function() {
         $.ajax({
             type: "get",
@@ -345,12 +413,13 @@
             // dataType: "json",
             success: function(result) {
                 // alert(result[0].lastUpdate)
-                data.push(result[0].lastUpdate);
-                if (data.length > 100) {
+                // data.push(result[0].lastUpdate);
+                data.push(result[0].metricValue);
+                if (data.length > 50) {
                     data.shift()
                 }
 
-                myChart.setOption({
+                myChart_ifinpkts.setOption({
                     series: [{
 
                         data: data
@@ -358,7 +427,8 @@
 
                 });
 
-                $("#aa").html(result[0].lastUpdate);
+                // $("#aa").html(result[0].lastUpdate);
+                $("#ifinpkts").html(result[0].metricValue);
 
             },
             error: function(error) {
@@ -368,10 +438,315 @@
             }
         });
         // alert("data="+data);
-    }, 500);
+    }, 1000);
+
+    //http://10.211.55.9:8008/metric/ALL/4.ifinpkts/json
+    setInterval(function() {
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "/apis/metric/ALL/4.ifinpkts/json",
+            data: {},
+            // dataType: "json",
+            success: function(result) {
+                // alert(result[0].lastUpdate)
+                // data.push(result[0].lastUpdate);
+                data_s1_eth1_ifinpkts.push(result[0].metricValue);
+                if (data_s1_eth1_ifinpkts.length > 50) {
+                    data_s1_eth1_ifinpkts.shift()
+                }
+
+                myChart_s1_eth1_ifinpkts.setOption({
+                    title: {
+                        text: 's1_eth1_ifinpkts'
+                    },
+                    series: [{
+                        name: '4.ifinpkts',
+                        data: data_s1_eth1_ifinpkts
+                    }]
+
+                });
+
+                // $("#aa").html(result[0].lastUpdate);
+                $("#html_s1_eth1_ifinpkts").html(result[0].metricValue);
+
+            },
+            error: function(error) {
+                // alert(error)
+                alert("图表请求数据失败！");
+                // console("tupiao request false")
+            }
+        });
+        // alert("data="+data);
+    }, 1000);
+
+    //http://10.211.55.9:8008/metric/ALL/5.ifinpkts/json
+    setInterval(function() {
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "/apis/metric/ALL/5.ifinpkts/json",
+            data: {},
+            // dataType: "json",
+            success: function(result) {
+                // alert(result[0].lastUpdate)
+                // data.push(result[0].lastUpdate);
+                data_s1_eth2_ifinpkts.push(result[0].metricValue);
+                if (data_s1_eth2_ifinpkts.length > 50) {
+                    data_s1_eth2_ifinpkts.shift()
+                }
+
+                myChart_s1_eth2_ifinpkts.setOption({
+                    series: [{
+                        name: '4.ifinpkts',
+                        data: data_s1_eth2_ifinpkts
+                    }]
+
+                });
+
+                // $("#aa").html(result[0].lastUpdate);
+                $("#html_s1_eth2_ifinpkts").html(result[0].metricValue);
+
+            },
+            error: function(error) {
+                // alert(error)
+                alert("图表请求数据失败！");
+                // console("tupiao request false")
+            }
+        });
+        // alert("data="+data);
+    }, 1000);
+
+    myChart_ifinpkts.setOption(option);
+    myChart_s1_eth1_ifinpkts.setOption(option);
+    myChart_s1_eth2_ifinpkts.setOption(option);
+</script>
+
+<!--//http://10.211.55.9:8008/metric/ALL/ifinoctets/json-->
+<script>
+    var myChart_ifinoctets = echarts.init(document.getElementById('main1'));
+
+    var data_ifinoctets = [];
+
+    for (var i = 1; i < 50; i++) {
+        data_ifinoctets.push(0)
 
 
-    myChart.setOption(option);
+    }
+
+    option_ifinoctets = {
+        xAxis: {
+            data: []
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            name: 'ifinoctets',
+            type: 'line',
+            smooth: false,
+            symbol: 'none',
+            // stack: 'a',
+            areaStyle: {
+                normal: {}
+            },
+            data: []
+        }]
+    };
+
+    //http://10.211.55.9:8008/metric/ALL/ifinoctets/json
+    setInterval(function() {
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "/apis/metric/ALL/ifinoctets/json",
+            data: {},
+            // dataType: "json",
+            success: function(result) {
+                // alert(result[0].lastUpdate)
+                // data.push(result[0].lastUpdate);
+                data_ifinoctets.push(result[0].metricValue);
+                if (data_ifinoctets.length > 50) {
+                    data_ifinoctets.shift()
+                }
+
+                myChart_ifinoctets.setOption({
+                    series: [{
+
+                        data: data_ifinoctets
+                    }]
+
+                });
+
+                // $("#aa").html(result[0].lastUpdate);
+                $("#ifinoctets").html(result[0].metricValue);
+
+            },
+            error: function(error) {
+                // alert(error)
+                alert("图表请求数据失败！");
+                // console("tupiao request false")
+            }
+        });
+        // alert("data="+data);
+    }, 1000);
+
+    myChart_ifinoctets.setOption(option_ifinoctets);
+
+</script>
+
+<!--//http://10.211.55.9:8008/metric/ALL/ifoutpkts/json-->
+<script>
+    var myChart_ifoutpkts = echarts.init(document.getElementById('main2'));
+    var myChart_s1_eth1_ifoutpkts = echarts.init(document.getElementById('main_s1_eth1_ifoutpkts'));
+    var myChart_s1_eth2_ifoutpkts = echarts.init(document.getElementById('main_s1_eth2_ifoutpkts'));
+
+    var data_ifoutpkts = [];
+    var data_s1_eth1_ifoutpkts = [];
+    var data_s1_eth2_ifoutpkts = [];
+
+    for (var i = 1; i < 50; i++) {
+        data_ifoutpkts.push(0);
+        data_s1_eth1_ifoutpkts.push(0);
+        data_s1_eth2_ifoutpkts.push(0);
+    }
+
+    option_ifoutpkts = {
+        xAxis: {
+            data: []
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            name: 'ifoutpkts',
+            type: 'line',
+            // smooth: false,
+            symbol: 'none',
+            // stack: 'a',
+            areaStyle: {
+                normal: {}
+            },
+            data: []
+        }]
+    };
+
+
+    //http://10.211.55.9:8008/metric/ALL/ifoutpkts/json
+    setInterval(function() {
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "/apis/metric/ALL/ifoutpkts/json",
+            data: {},
+            // dataType: "json",
+            success: function(result) {
+                // alert(result[0].lastUpdate)
+                // data.push(result[0].lastUpdate);
+                data_ifoutpkts.push(result[0].metricValue);
+                if (data_ifoutpkts.length > 50) {
+                    data_ifoutpkts.shift()
+                }
+
+                myChart_ifoutpkts.setOption({
+                    series: [{
+
+                        data: data_ifoutpkts
+                    }]
+
+                });
+
+                // $("#aa").html(result[0].lastUpdate);
+                $("#ifoutpkts").html(result[0].metricValue);
+
+            },
+            error: function(error) {
+                // alert(error)
+                alert("图表请求数据失败！");
+                // console("tupiao request false")
+            }
+        });
+        // alert("data="+data);
+    }, 2000);
+
+    //http://10.211.55.9:8008/metric/ALL/4.ifoutpkts/json
+    setInterval(function() {
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "/apis/metric/ALL/4.ifoutpkts/json",
+            data: {},
+            // dataType: "json",
+            success: function(result) {
+                // alert(result[0].lastUpdate)
+                // data.push(result[0].lastUpdate);
+                data_s1_eth1_ifoutpkts.push(result[0].metricValue);
+                if (data_s1_eth1_ifoutpkts.length > 50) {
+                    data_s1_eth1_ifoutpkts.shift()
+                }
+
+                myChart_s1_eth1_ifoutpkts.setOption({
+                    series: [{
+
+                        data: data_s1_eth1_ifoutpkts
+                    }]
+
+                });
+
+                // $("#aa").html(result[0].lastUpdate);
+                $("#html_s1_eth1_ifoutpkts").html(result[0].metricValue);
+
+            },
+            error: function(error) {
+                // alert(error)
+                alert("图表请求数据失败！");
+                // console("tupiao request false")
+            }
+        });
+        // alert("data="+data);
+    }, 2000);
+
+    //http://10.211.55.9:8008/metric/ALL/4.ifoutpkts/json
+    setInterval(function() {
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "/apis/metric/ALL/4.ifoutpkts/json",
+            data: {},
+            // dataType: "json",
+            success: function(result) {
+                // alert(result[0].lastUpdate)
+                // data.push(result[0].lastUpdate);
+                data_s1_eth2_ifoutpkts.push(result[0].metricValue);
+                if (data_s1_eth2_ifoutpkts.length > 50) {
+                    data_s1_eth2_ifoutpkts.shift();
+                }
+
+                myChart_s1_eth2_ifoutpkts.setOption({
+                    series: [{
+
+                        data: data_s1_eth2_ifoutpkts
+                    }]
+
+                });
+
+                // $("#aa").html(result[0].lastUpdate);
+                $("#html_s1_eth2_ifoutpkts").html(result[0].metricValue);
+
+            },
+            error: function(error) {
+                // alert(error)
+                alert("图表请求数据失败！");
+                // console("tupiao request false")
+            }
+        });
+        // alert("data="+data);
+    }, 2000);
+
+    myChart_ifoutpkts.setOption(option_ifoutpkts);
+    myChart_s1_eth1_ifoutpkts.setOption(option_ifoutpkts);
+    myChart_s1_eth2_ifoutpkts.setOption(option_ifoutpkts);
+
 </script>
 
 </body>

@@ -184,7 +184,7 @@
                             <i class="fa fa-edit fa-fw"></i> flowui
                         </a>
                     </li>
-                    <li><a href="#">
+                    <li><a href="/th/echartdemo_topo">
                         <i class="fa fa-dashboard fa-fw"></i> topoui
                     </a>
                     </li>
@@ -194,7 +194,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/th/node_connector">
                             <i class="fa fa-angellist fa-fw" ></i>设备信息
                         </a>
                     </li>
@@ -260,6 +260,80 @@
                     </table>
                     <div class="col-md-12 text-right">
                         <itheima:page url="${pageContext.request.contextPath }/customer/list.action" />
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Link</div>
+                    <!-- /.panel-heading -->
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>linkId</th>
+                            <th>destNode</th>
+                            <th>destTp</th>
+                            <th>sourceTp</th>
+                            <th>sourceNode</th>
+                            <!--<th>operate</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="tplink:${tplinkList}">
+                            <td th:text="${tplink.linkId}"></td>
+                            <td th:text="${tplink.destNode}"></td>
+                            <td th:text="${tplink.destTp}"></td>
+                            <td th:text="${tplink.sourceTp}"></td>
+                            <td th:text="${tplink.sourceNode}"></td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="col-md-12 text-right">
+                        <!--<itheima:page url="${pageContext.request.contextPath }/customer/list.action" />-->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">TpNode</div>
+                    <!-- /.panel-heading -->
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>nodeId</th>
+                            <th>terminationPointTpId</th>
+                            <th>addresseId</th>
+                            <th>firstSeen</th>
+                            <th>mac</th>
+                            <th>lastSeen</th>
+                            <th>ip</th>
+                            <th>hostTrackerServiceId</th>
+                            <th>attachmentPointTpId</th>
+                            <th>correspondingTp</th>
+                            <th>active</th>
+                            <!--<th>operate</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="tpnode:${tpNodeList}">
+                            <td th:text="${tpnode.nodeId}"></td>
+                            <td th:text="${tpnode.terminationPointTpId}"></td>
+                            <td th:text="${tpnode.addresseId}"></td>
+                            <td th:text="${tpnode.firstSeen}"></td>
+                            <td th:text="${tpnode.mac}"></td>
+                            <td th:text="${tpnode.lastSeen}"></td>
+                            <td th:text="${tpnode.ip}"></td>
+                            <td th:text="${tpnode.hostTrackerServiceId}"></td>
+                            <td th:text="${tpnode.attachmentPointTpId}"></td>
+                            <td th:text="${tpnode.correspondingTp}"></td>
+                            <td th:text="${tpnode.active}"></td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="col-md-12 text-right">
+                        <!--<itheima:page url="${pageContext.request.contextPath }/customer/list.action" />-->
                     </div>
                     <!-- /.panel-body -->
                 </div>

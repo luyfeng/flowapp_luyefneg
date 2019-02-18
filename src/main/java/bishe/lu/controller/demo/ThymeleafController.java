@@ -10,10 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("th")
 public class ThymeleafController {
 
-	@RequestMapping("/flowui")
+    @RequestMapping("/echartdemo_topo")
+    public String echartdemo_topo() {
+        return "thymeleaf/echartdemo_topo";
+    }
+
+
+    @RequestMapping("/flowui")
     public String flowui(ModelMap map) {
         map.addAttribute("name", "thymeleaf-lululu");
-        return "thymeleaf/flowui";
+        return "redirect:/flow/queryFlowList";
     }
 
     @RequestMapping("/echartdemo")
@@ -33,7 +39,6 @@ public class ThymeleafController {
     }
 
 
-	
 //	@RequestMapping("test")
 //    public String test(ModelMap map) {
 //
