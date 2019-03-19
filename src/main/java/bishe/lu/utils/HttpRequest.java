@@ -25,7 +25,7 @@ public class HttpRequest {
      * @return URL 所代表远程资源的响应结果
      *
      * 引用：
-     * 作者：胡大炮的妖孽人生
+     * 作者：
      * 原文：https://blog.csdn.net/huplion/article/details/53185578
      */
     public static String sendGet(String url, String param) {

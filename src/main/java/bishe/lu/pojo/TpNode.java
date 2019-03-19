@@ -188,4 +188,21 @@ public class TpNode {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    @Override
+    public String toString() {
+        return "TpNode{" +
+                "nodeId='" + nodeId + '\'' +
+                ", terminationPointTpId='" + terminationPointTpId + '\'' +
+                ", addresseId='" + addresseId + '\'' +
+                ", firstSeen='" + firstSeen + '\'' +
+                ", mac='" + mac + '\'' +
+                ", lastSeen='" + lastSeen + '\'' +
+                ", ip='" + ip + '\'' +
+                ", hostTrackerServiceId='" + hostTrackerServiceId + '\'' +
+                ", attachmentPointTpId='" + attachmentPointTpId + '\'' +
+                ", correspondingTp='" + correspondingTp + '\'' +
+                ", active=" + active +
+                '}';
+    }
 }

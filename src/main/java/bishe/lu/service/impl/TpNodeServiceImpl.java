@@ -1,6 +1,7 @@
 package bishe.lu.service.impl;
 
 import bishe.lu.mapper.TpNodeMapper;
+import bishe.lu.pojo.TpLink;
 import bishe.lu.pojo.TpNode;
 import bishe.lu.service.TpNodeService;
 import bishe.lu.service.model.topomodel.*;
@@ -21,7 +22,7 @@ public class TpNodeServiceImpl implements TpNodeService {
     public void saveTpNode() {
 
         //调用odl接口类，取出数据
-        OdlUtil odlUtil = new OdlUtil("10.1.11.15",8181);
+        OdlUtil odlUtil = new OdlUtil("10.211.55.10",8181);
 
         String str = null;
         str = odlUtil.getTpNodes();
@@ -80,8 +81,13 @@ public class TpNodeServiceImpl implements TpNodeService {
                     tpNode.setActive(nodeTPBean.getHostTrackerService_attachmentPointsBeanList().get(0).getActive());
                 }else {tpNode.setActive(null);}
 
-                //存入数据库
-                tpNodeMapper.insert(tpNode);
+                //查询数据库，判断是否有数据，没有则插入
+                TpNode node = tpNodeMapper.selectByPrimaryKey(nodeTPBean.getNodeId());
+                if (null == node) {
+                    //存入数据库
+                    tpNodeMapper.insert(tpNode);
+                    System.out.println("tpNode**************"+tpNode.toString());
+                }
             }
         }
 

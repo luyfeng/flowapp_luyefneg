@@ -308,7 +308,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="tab:${flowList1}">
+                        <tr th:each="tab:${flowList1.rows}">
                             <!--<td th:text="${tab.id}"></td>-->
                             <td th:text="${tab.flowId}" th:id="${tab.flowId}"></td>
                             <td th:text="${tab.priority}"></td>
@@ -335,6 +335,67 @@
                     </table>
                     <div class="col-md-12 text-right">
                         <!--<itheima:page url="${pageContext.request.contextPath }/customer/list.action" />-->
+
+                        <!--page=<i th:text="${flowList1.page}"></i>-->
+                        <!--size=<i th:text="${flowList1.size}"></i>-->
+                        <!--flowList1.rows.size()=<i th:text="${flowList1.rows.size()}"></i>-->
+                        <!--flowList1.rows.get()=  <i th:text="${flowList1.rows.get(${flowList1.page})}"></i>-->
+                        <!--flowList1.rows.iterator()=<i th:text="${flowList1.rows.iterator()}"></i>-->
+                        <!--flowList1.rows.toArray()= <i th:text="${flowList1.rows.toArray()}"></i>-->
+                        <!--flowList1.rows.listIterator()= <i th:text="${flowList1.rows.listIterator()}"></i>-->
+                        <!--flowList1.rows= <i th:text="${flowList1.rows}"></i>-->
+                        <!--<i th:text="${flowList1.rows.listIterator()}"></i>-->
+
+
+
+                        <div class="clearfix">
+                            <ul class="pagination m-b-5 pull-right">
+                                <li th:if="${flowList1.page} gt 1"><a
+                                        th:href="@{'/flow/queryFlowList?page='+${flowList1.page -1}}"
+                                        aria-label="Previous"> <i class="fa fa-angle-left"></i>&nbsp;上一页
+                                </a></li>
+
+                                <!--<th:block th:each="nav : ${flowList1.rows.size() }" >-->
+                                    <!--&lt;!&ndash;<li th:class="${nav==users.pageNum}?'active':''"><a&ndash;&gt;-->
+                                    <!--<li th:class="${nav==flowList1.page}?'active':''"><a-->
+
+                                            <!--th:href="@{'/flow/queryFlowList?page='+${nav}}"-->
+                                            <!--th:text="${nav}"></a></li>-->
+                                <!--</th:block>-->
+
+
+                                <li th:class="${1==flowList1.page}?'active':''"><a
+
+                                        th:href="@{'/flow/queryFlowList?page='+${1}}"
+                                        th:text="${1}"></a>
+                                </li>
+                                <li th:class="${2==flowList1.page}?'active':''"><a
+
+                                        th:href="@{'/flow/queryFlowList?page='+${2}}"
+                                        th:text="${2}"></a>
+                                </li>
+                                <li th:class="${3==flowList1.page}?'active':''"><a
+
+                                        th:href="@{'/flow/queryFlowList?page='+${3}}"
+                                        th:text="${3}"></a>
+                                </li>
+
+
+
+
+                                <th:block th:if="${flowList1.page} lt 3">
+                                    <li><a
+                                            th:href="@{'/flow/queryFlowList?page='+${flowList1.page +1}}"
+                                            aria-label="Next"> 下一页&nbsp;<i class="fa fa-angle-right"></i>
+                                    </a></li>
+                                </th:block>
+
+                                <li><span th:text="'共'+${flowList1.total /5 +1}+'页'"></span></li>
+                            </ul>
+                        </div>
+
+
+
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -441,7 +502,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">修改flow信息</h4>
+                <h4 class="modal-title" id="myModalLabel">添加flow信息</h4>
             </div>
             <!--<div class="modal-body" th:object="${flowById}">-->
             <div class="modal-body" >

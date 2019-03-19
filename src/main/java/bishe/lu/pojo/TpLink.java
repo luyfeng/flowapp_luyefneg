@@ -89,4 +89,15 @@ public class TpLink {
     public void setSourceNode(String sourceNode) {
         this.sourceNode = sourceNode;
     }
+
+    @Override
+    public String toString() {
+        return "TpLink{" +
+                "linkId='" + linkId + '\'' +
+                ", destNode='" + destNode + '\'' +
+                ", destTp='" + destTp + '\'' +
+                ", sourceTp='" + sourceTp + '\'' +
+                ", sourceNode='" + sourceNode + '\'' +
+                '}';
+    }
 }

@@ -13,5 +13,6 @@ public interface TpLinkService {
 
 
     public void saveTpLink();
+    public TpLink saveTpLinkapi(TpLink link);
     public List<TpLink> queryTpLinkList(TpLink tpLink);
 }

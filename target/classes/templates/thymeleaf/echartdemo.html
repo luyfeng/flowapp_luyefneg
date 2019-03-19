@@ -318,9 +318,7 @@
                     <div style="height: 250px;width: 500px;">
                         <div style="height: 100%; margin: 0">
                             <div id="main2" style="height: 100%"></div>
-                            <a data-toggle="modal" data-target="#ifoutpktsDialog">
                             <p id="ifoutpkts" class="text-right"></p>
-                            </a>
                         </div>
                     </div>
                     <div style="height: 250px;width: 500px;">
@@ -347,14 +345,6 @@
         </div>
     </div>
 
-</div>
-
-<!--图表详细信息-->
-<div class="modal fade" id="ifoutpktsDialog" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content"></div>
-    </div>
 </div>
 
 <!-- jQuery -->
@@ -394,7 +384,21 @@
 
 
     option = {
+
+        //--悬浮窗--
+        tooltip:{
+            trigger:'item', //当trigger为’item’时只会显示该点的数据，为’axis’时显示该列下所有坐标轴所对应的数据。
+            position:'bottom',//悬浮时显示的位置
+            backgroundColor:'#0050FF',
+            textStyle:{fontSize:18,},
+            formatter:function(params){//悬浮提示框显示的内容
+
+            }
+        },
+
         xAxis: {
+            // type:'',
+            // boundaryGap : false,
             data: []
         },
         yAxis: {
@@ -443,7 +447,7 @@
             },
             error: function(error) {
                 // alert(error)
-                alert("图表请求数据失败！");
+                // alert("图表请求数据失败！");
                 // console("tupiao request false")
             }
         });

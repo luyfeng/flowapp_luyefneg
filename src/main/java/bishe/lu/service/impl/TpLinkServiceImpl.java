@@ -11,6 +11,7 @@ import bishe.lu.utils.OdlUtil;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,9 +23,10 @@ public class TpLinkServiceImpl implements TpLinkService {
     TpLinkMapper tpLinkMapper;
 
     @Override
+    @Transactional
     public void saveTpLink() {
         //调用odl接口类，取出数据
-        OdlUtil odlUtil = new OdlUtil("10.1.11.15",8181);
+        OdlUtil odlUtil = new OdlUtil("10.211.55.10",8181);
 
         String str = null;
         str = odlUtil.getTpLinks();
@@ -47,9 +49,50 @@ public class TpLinkServiceImpl implements TpLinkService {
                 tpLink.setDestTp(linkBean.getDestinationBean().getDestTp());
                 tpLink.setSourceTp(linkBean.getSourceBean().getSourceTp());
                 tpLink.setSourceNode(linkBean.getSourceBean().getSourceNode());
-                tpLinkMapper.insert(tpLink);
+                TpLink link = tpLinkMapper.selectByPrimaryKey(linkBean.getLinkId());
+                System.out.println("linktest===="+link);
+                if (null == link) {
+                    tpLinkMapper.insert(tpLink);
+                    System.out.println("lulu123**************"+tpLink.toString());
+                }
+
+
             }
         }
+    }
+
+    @Override
+    public TpLink saveTpLinkapi(TpLink tpLink) {
+        //调用odl接口类，取出数据
+        OdlUtil odlUtil = new OdlUtil("10.211.55.10",8181);
+
+        String str = null;
+        str = odlUtil.getTpLinks();
+
+        Gson gson = new Gson();
+
+        //用gson把json字符串数据转化成javabean实体，数据存到NodesRootBean类中
+        NetworkTopologyRootBean networkTopologyRootBean = gson.fromJson(str,NetworkTopologyRootBean.class);
+
+//        TpLink tpLink = new TpLink();
+
+        //把从odl接口取到的数据存到pojo中，然后存入数据库
+        NetworkTopologyBean networkTopologyBean = networkTopologyRootBean.getNetworkTopology();
+        List<TopologyBean> topologyBeanList = networkTopologyBean.getTopologyBeanList();
+        for (TopologyBean topologyBean : topologyBeanList) {
+            List<LinkBean> linkBeanList = topologyBean.getLinkBeanList();
+            for (LinkBean linkBean : linkBeanList) {
+                tpLink.setLinkId(linkBean.getLinkId());
+                tpLink.setDestNode(linkBean.getDestinationBean().getDestNode());
+                tpLink.setDestTp(linkBean.getDestinationBean().getDestTp());
+                tpLink.setSourceTp(linkBean.getSourceBean().getSourceTp());
+                tpLink.setSourceNode(linkBean.getSourceBean().getSourceNode());
+                tpLinkMapper.insert(tpLink);
+                System.out.println("lulu123**************"+tpLink);
+                return tpLink;
+            }
+        }
+        return tpLink;
     }
 
     @Override

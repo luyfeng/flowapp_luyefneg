@@ -1,8 +1,12 @@
 package bishe.lu.controller;
 
 import bishe.lu.pojo.LuJSONResult;
+import bishe.lu.pojo.QueryVo;
 import bishe.lu.pojo.TbFlow;
 import bishe.lu.service.TbFlowService;
+import bishe.lu.utils.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,23 +75,53 @@ public class FlowController {
         return "redirect:/flow/queryFlowList";
     }
 
-    //2.查询所有flow
+    //2.查询所有flow （用form表单方式传递数据）
     @RequestMapping("/queryFlowList")
-    public String queryFlowList(TbFlow test, ModelMap map){
+//    public String queryFlowList(TbFlow test, ModelMap map){
+    public String queryFlowList(QueryVo vo, ModelMap map){
+
         TbFlow flow = new TbFlow();
         List<TbFlow> flowList = tbFlowService.queryTbFlowList(flow);
         map.addAttribute("flowList",flowList);
 
-        List<TbFlow> flowList1 = tbFlowService.selectFlowListByQueryVo(test);
-        map.addAttribute("flowList1",flowList1);
+//        List<TbFlow> flowList1 = tbFlowService.selectFlowListByQueryVo2(test);
+//        map.addAttribute("flowList1",flowList1);
+//
+//        map.addAttribute("tableId",test.getTableId());
+//        map.addAttribute("flowId",test.getFlowId());
+//        map.addAttribute("inPort",test.getInPort());
+//        map.addAttribute("outputNodeConnector",test.getOutputNodeConnector());
 
-        map.addAttribute("tableId",test.getTableId());
-        map.addAttribute("flowId",test.getFlowId());
-        map.addAttribute("inPort",test.getInPort());
-        map.addAttribute("outputNodeConnector",test.getOutputNodeConnector());
+        /**
+         * 2019.3.6
+         * 分页查询
+         * 鸡肋
+         * //        PageHelper.startPage(currentPage,1);
+         * //        PageInfo<TbFlow> pageInfo = new PageInfo<>(blogs)
+         */
+        Page<TbFlow> flowList1 = tbFlowService.selectPageByQueryVo(vo);
+        map.addAttribute("flowList1",flowList1);
+        map.addAttribute("tableId",vo.getTableId());
+        map.addAttribute("flowId",vo.getFlowId());
+        map.addAttribute("inPort",vo.getInPort());
+        map.addAttribute("outputNodeConnector",vo.getOutputNodeConnector());
+
+//        for(int i=1; flowList1.getTotal() / 5 + 1 > 0; i++) {
+//            vo.setPageNums();
+//            }
+
 
 //        return "thymeleaf/tb_flow";
         return "thymeleaf/flowui";
+    }
+
+    //2.2 api方式 查询所有flow (这样可以用ajax方式传递数据)
+    @RequestMapping("apiFlowList")
+    @ResponseBody
+    public LuJSONResult apiFlowList(){
+        TbFlow flow = new TbFlow();
+        List<TbFlow> list = tbFlowService.queryTbFlowList(flow);
+        return LuJSONResult.ok(list);
     }
 
 

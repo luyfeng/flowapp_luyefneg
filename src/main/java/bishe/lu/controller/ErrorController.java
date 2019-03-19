@@ -26,8 +26,8 @@ public class ErrorController {
 	@ResponseBody
 	public LuJSONResult getAjaxerror() {
 		
-		int a = 1 / 0;
+		int a = 1 / 1;
 		
-		return LuJSONResult.ok();
+		return LuJSONResult.ok(a);
 	}
 }

@@ -257,22 +257,79 @@
     //基于准备好的dom,初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
 
+
+    var node = [];
+    $.ajax({
+        type : "get",
+        async : false,
+        url : "/topo/getTpNodeListapi",
+        data : {},
+        success : function(result) {
+            var i = 0;
+            $.each(result.data, function (key, value) {
+                node[i] = value;
+                i++;
+            });
+            // console.log(node);
+
+        }
+
+    });
+    console.log(node);
+
+    var link = [];
+    $.ajax({
+        type : "get",
+        async : false,
+        url : "/topo/getTpLinkListapi",
+        data : {},
+        success : function (result2) {
+            var j = 0;
+            $.each(result2.data, function (key, value) {
+                link[j] = value;
+                j++;
+
+            })
+
+        }
+    });
+    console.log(link);
+
+
+
+
+
     //指定图表的配置项和数据
     var option = {
         title: {
             text: '简单网络拓扑'
         },
-        tooltip: {},
+        // tooltip: {},
+
+        tooltip:{
+            position:'bottom',//悬浮时显示的位置
+            backgroundColor:'#0050FF',
+            textStyle:{fontSize:18,},
+
+            formatter:function(params){//悬浮提示框显示的内容
+                if(params.data.name){return "x:"+params.data.x+"   name: "+params.data.name}
+            }
+        },
+
         animationDurationUpdate: 1500,
         animationEasingUpdate: 'quinticInOut',
         series: [{
             type: 'graph',
             layout: 'none',
-            symbolSize: 50,
-            roam: true,
+            symbolSize: 50,   //图形的大小 圆的大小
+            roam: true,//鼠标缩放及平移
+            focusNodeAdjacency:true,//是否在鼠标移到节点上的时候突出显示节点、节点的边和邻接节点
             label: {
                 normal: {
-                    show: true
+                    show: true   //控制非高亮时节点名称是否显示
+                    // position:'top',
+                    // fontSize:18,
+                    // color:'blue'
                 }
             },
             edgeSymbol: ['circle', 'arrow'],
@@ -284,34 +341,38 @@
                     }
                 }
             },
-            data: [{
-                name: '主机1',
-                x: 100,
-                y: 100
-            }, {
-                name: '主机2',
-                x: 220,
-                y: 310
-            }, {
-                name: '交换机s1',
-                x: 100,
-                y: 200
-            }, {
-                name: '主机4',
-                x: 10,
-                y: 300
-            }],
-            // links: [],
-            links: [{
-                source: '交换机s1',
-                target: '主机1'
-            }, {
-                source: '交换机s1',
-                target: '主机2'
-            }, {
-                source: '交换机s1',
-                target: '主机4'
-            }],
+            // data: [{
+            //     name: '主机1',
+            //     x: 100,
+            //     y: 100
+            // }, {
+            //     name: '主机2',
+            //     x: 220,
+            //     y: 310
+            // }, {
+            //     name: '交换机s1',
+            //     x: 100,
+            //     y: 200
+            // }, {
+            //     name: '主机4',
+            //     x: 10,
+            //     y: 300
+            // }],
+            // // links: [],
+            // links: [{
+            //     source: '交换机s1',
+            //     target: '主机1'
+            // }, {
+            //     source: '交换机s1',
+            //     target: '主机2'
+            // }, {
+            //     source: '交换机s1',
+            //     target: '主机4'
+            // }],
+
+            data:[],
+            links:[],
+
             lineStyle: {
                 normal: {
                     opacity: 0.9,
@@ -321,6 +382,12 @@
             }
         }]
     };
+
+    //--- 传值 ---
+    option.series[0].data = node;
+    option.series[0].links = link;
+
+    console.log(option.series[0].data)
 
     //使用刚指定的配置项和数据显示图表.
     myChart.setOption(option);

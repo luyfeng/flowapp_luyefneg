@@ -384,7 +384,21 @@
 
 
     option = {
+
+        //--悬浮窗--
+        tooltip:{
+            trigger:'item', //当trigger为’item’时只会显示该点的数据，为’axis’时显示该列下所有坐标轴所对应的数据。
+            position:'bottom',//悬浮时显示的位置
+            backgroundColor:'#0050FF',
+            textStyle:{fontSize:18,},
+            formatter:function(params){//悬浮提示框显示的内容
+
+            }
+        },
+
         xAxis: {
+            // type:'',
+            // boundaryGap : false,
             data: []
         },
         yAxis: {
@@ -433,7 +447,7 @@
             },
             error: function(error) {
                 // alert(error)
-                alert("图表请求数据失败！");
+                // alert("图表请求数据失败！");
                 // console("tupiao request false")
             }
         });
