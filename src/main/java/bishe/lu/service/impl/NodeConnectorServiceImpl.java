@@ -23,7 +23,7 @@ public class NodeConnectorServiceImpl implements NodeConnectorService {
     @Override
     public void saveNodeConnector() {
 
-        OdlUtil odlUtil = new OdlUtil("10.1.11.15",8181);
+        OdlUtil odlUtil = new OdlUtil("10.211.55.10",8181);
         String str = null;
         str = odlUtil.getNodes();
 

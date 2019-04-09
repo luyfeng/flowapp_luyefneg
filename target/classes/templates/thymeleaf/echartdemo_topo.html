@@ -224,13 +224,108 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
-                <div id="main" style="width: 600px;height: 400px;"></div>
+            <div class="col-lg-6">
+                <div id="main" style="height: 400px;"></div>
                 <!-- /.panel -->
             </div>
             <!-- /.col-lg-12 -->
+            <div class="col-lg-6">
+                <div style="background-color: #5bc0de;height: 400px;">
+                    <div class="panel panel-default table-responsive table-hover">
+
+                        <div class="panel-heading"><h4>控制器信息</h4></div>
+
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>交换机连接的控制器IP</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="text-center">
+                                <td>10.211.55.10</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div style="background-color: #2e6da4;height: 300px;">
+
+                    <div class="panel panel-default table-responsive table-hover">
+
+                    <div class="panel-body"><d>交换机</d></div>
+                    <!-- /.panel-heading -->
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>交换机名称</th>
+                            <th>交换机IP</th>
+                            <th>交换机MAC</th>
+                            <th>连接PC数</th连接PC数>
+                            <!--<th>operate</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--<tr>-->
+                        <tr >
+                            <td >openflow:1</td>
+                            <td >------</td>
+                            <td >------</td>
+                            <td >2</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                    <div class="panel panel-default table-responsive table-hover">
+
+                        <div class="panel-heading">个人主机</div>
+                        <!-- /.panel-heading -->
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>PC设备</th>
+                                <th>PC的IP</th>
+                                <th>PC的MAC地址</th>
+                                <th>连接的交换机</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr>-->
+                            <tr >
+                                <td >host:c2:d1:24:4b:aa:c0</td>
+                                <td >10.0.0.1</td>
+                                <td >c2:d1:24:4b:aa:c0</td>
+                                <td >openflow:1</td>
+                            </tr>
+                            <tr >
+                                <td >host:ce:61:4c:34:15:77</td>
+                                <td >10.0.0.2</td>
+                                <td >ce:61:4c:34:15:77</td>
+                                <td >openflow:1</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--<div class="row">-->
+                <!--<div class="col-lg-12" style="background-color: #2e6da4;width: 1600px;height: 400px;">-->
+
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
+
     <!-- /#page-wrapper -->
 
 </div>
@@ -301,6 +396,10 @@
 
     //指定图表的配置项和数据
     var option = {
+
+        // backgroundColor: '#2c343c', //画布颜色
+        backgroundColor: 'gray',
+
         title: {
             text: '简单网络拓扑'
         },
@@ -387,7 +486,7 @@
     option.series[0].data = node;
     option.series[0].links = link;
 
-    console.log(option.series[0].data)
+    console.log(option.series[0].data);
 
     //使用刚指定的配置项和数据显示图表.
     myChart.setOption(option);
