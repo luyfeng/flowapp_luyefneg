@@ -10,6 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("th")
 public class ThymeleafController {
 
+    @RequestMapping("/demo_flow_data")
+    public String demo_flow_data(){
+        return "thymeleaf/demo_flow_data";
+    }
+
+    @RequestMapping("/demo_nodes")
+    public String demo_nodes() {
+        return "thymeleaf/demo_nodes";
+    }
+
+    @RequestMapping("/putflow")
+    public String putflow(){
+        return "thymeleaf/putflow";
+    }
+
     @RequestMapping("/echartdemo_topo")
     public String echartdemo_topo() {
         return "thymeleaf/echartdemo_topo";

@@ -2,6 +2,8 @@ package bishe.lu.service.model.nodesmodel;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 //4
 public class NodeConnectorBean {
 
@@ -18,6 +20,27 @@ public class NodeConnectorBean {
     private String FlowNodeInventory_Name;
     @SerializedName("flow-node-inventory:state")
     private FlowNodeInventory_StateBean FlowNodeInventory_State;
+
+    @SerializedName("address-tracker:addresses")
+    private List<AddressTrackerAddresses> addressTrackerAddresses;
+    @SerializedName("opendaylight-port-statistics:flow-capable-node-connector-statistics")
+    private OpendaylightPortStatisticsFlowCapableNodeConnectorStatistics opendaylightPortStatisticsFlowCapableNodeConnectorStatistics;
+
+    public OpendaylightPortStatisticsFlowCapableNodeConnectorStatistics getOpendaylightPortStatisticsFlowCapableNodeConnectorStatistics() {
+        return opendaylightPortStatisticsFlowCapableNodeConnectorStatistics;
+    }
+
+    public void setOpendaylightPortStatisticsFlowCapableNodeConnectorStatistics(OpendaylightPortStatisticsFlowCapableNodeConnectorStatistics opendaylightPortStatisticsFlowCapableNodeConnectorStatistics) {
+        this.opendaylightPortStatisticsFlowCapableNodeConnectorStatistics = opendaylightPortStatisticsFlowCapableNodeConnectorStatistics;
+    }
+
+    public List<AddressTrackerAddresses> getAddressTrackerAddresses() {
+        return addressTrackerAddresses;
+    }
+
+    public void setAddressTrackerAddresses(List<AddressTrackerAddresses> addressTrackerAddresses) {
+        this.addressTrackerAddresses = addressTrackerAddresses;
+    }
 
     public String getId() {
         return id;

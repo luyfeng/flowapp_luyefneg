@@ -9,6 +9,10 @@
     <meta name="author" content="">
 
     <title>Controller-app</title>
+    <!-- jQuery -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/ecmascript" src="/static/js/grid.locale-en.js"></script>
+    <script type="text/ecmascript" src="/static/js/jquery.jqGrid.js"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +31,14 @@
           type="text/css">
     <link href="/static/css/boot-crm.css" rel="stylesheet"
           type="text/css">
+    <link href="/static/css/ui.jqgrid-bootstrap.css">
+
+    <script>
+        $.jgrid.defaults.width = 780;
+        $.jgrid.defaults.responsive = true;
+        $.jgrid.defaults.styleUI = 'Bootstrap';
+    </script>
+    <script src="/static/js/bootstrap.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -181,11 +193,11 @@
                     </li>
                     <li>
                         <a href="/th/flowui" class="active">
-                            <i class="fa fa-edit fa-fw"></i> flowui
+                            <i class="fa fa-edit fa-fw"></i> 流表操作
                         </a>
                     </li>
                     <li><a href="/th/echartdemo_topo">
-                        <i class="fa fa-dashboard fa-fw"></i> topoui
+                        <i class="fa fa-dashboard fa-fw"></i> 网络拓扑
                     </a>
                     </li>
                     <li>
@@ -195,19 +207,19 @@
                     </li>
                     <li>
                         <a href="/th/node_connector">
-                            <i class="fa fa-angellist fa-fw" ></i>设备信息
+                            <i class="fa fa-android fa-fw" ></i>设备信息
                         </a>
                     </li>
                     <li>
-                        <a href="">
-                            <i class="fa fa-line-chart fa-fw" ></i>导航5
+                        <a href="/th/demo_nodes">
+                            <i class="fa fa-desktop fa-fw" ></i>实时设备
                         </a>
                     </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-line-chart fa-fw" ></i>导航6
-                        </a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a href="">-->
+                            <!--<i class="fa fa-align-center fa-fw" ></i>导航6-->
+                        <!--</a>-->
+                    <!--</li>-->
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
@@ -223,135 +235,138 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <!--<form class="form-inline" action="/customer/list.action" method="post">-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="customerName">nodeid</label>-->
-                        <!--<input type="text" class="form-control" id="nodeid" value="${custName }" name="custName">-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="customerFrom">tableid</label>-->
-                        <!--<select	class="form-control" id="customerFrom" placeholder="客户来源" name="custSource">-->
-                            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-                            <!--<c:forEach items="${fromType}" var="item">-->
-                                <!--<option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>-->
-                            <!--</c:forEach>-->
-                        <!--</select>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="custIndustry">flowid</label>-->
-                        <!--<select	class="form-control" id="custIndustry"  name="custIndustry">-->
-                            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-                            <!--<c:forEach items="${industryType}" var="item">-->
-                                <!--<option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>-->
-                            <!--</c:forEach>-->
-                        <!--</select>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="custLevel">xxx</label>-->
-                        <!--<select	class="form-control" id="custLevel" name="custLevel">-->
-                            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-                            <!--<c:forEach items="${levelType}" var="item">-->
-                                <!--<option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>-->
-                            <!--</c:forEach>-->
-
-                        <!--</select>-->
-                    <!--</div>-->
-                    <!--<button type="submit" class="btn btn-primary">put</button>-->
-                <!--</form>-->
-            </div>
-        </div>
+        <!--<div class="panel panel-default">-->
+            <!--<div class="panel-body">-->
+            <!--</div>-->
+        <!--</div>-->
         <!--<div class="row">-->
-        <div >
+
+        <!--<ul id="myTabs" class="nav nav-tabs" role="tablist">-->
+            <!--<li role="presentation">-->
+                <!--<a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Home</a>-->
+            <!--</li>-->
+            <!--<li role="presentation" class="active">-->
+                <!--<a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Profile</a>-->
+            <!--</li>-->
+            <!--<li role="presentation" class="dropdown"></li>-->
+        <!--</ul>-->
+
+        <ul id="myTabs" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">接收包</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">接收字节</a></li>
+            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">发送包</a></li>
+            <li role="presentation"><a href="#rtpkts" aria-controls="rtpkts" role="tab" data-toggle="tab">数据统计</a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
             <!--<div class="col-lg-12">-->
-            <div class="col-lg-4">
+            <div role="tabpanel" class="tab-pane fade active in" id="home" >
                 <div class="panel panel-default">
                     <div class="panel-heading">ifinpkts</div>
                     <!-- /.panel-heading -->
-                    <div style="height: 250px;width: 500px;">
-                        <div style="height: 100%; margin: 0">
-                            <div id="main" style="height: 100%"></div>
-                            <p id="ifinpkts" class="text-right"></p>
+                    <div class="panel-body">
+                        <div>
+                            <div style="height: 300px; margin: 0" class="col-md-6">
+                                <div id="main" style="height: 100%"></div>
 
+                            </div>
+
+                            <div style="height: 300px; margin: 0" class="col-md-6">
+                                <div id="main_s1_eth1_ifinpkts" style="height: 100%"></div>
+                                <!--<p id="html_s1_eth1_ifinpkts" class="text-right"></p>-->
+                            </div>
                         </div>
-                    </div>
-                    <div style="height: 250px;width: 500px;">
-                        <div style="height: 100%; margin: 0">
-                            <div id="main_s1_eth1_ifinpkts" style="height: 100%"></div>
-                            <p id="html_s1_eth1_ifinpkts" class="text-right"></p>
+                        <div>
+                            <div style="height: 300px; margin: 0" class="col-md-6">
+                                <div id="main_s1_eth2_ifinpkts" style="height: 100%"></div>
+                                <!--<p id="html_s1_eth2_ifinpkts" class="text-right"></p>-->
+                            </div>
                         </div>
+
                     </div>
-                    <div style="height: 250px;width: 500px;">
-                        <div style="height: 100%; margin: 0">
-                            <div id="main_s1_eth2_ifinpkts" style="height: 100%"></div>
-                            <p id="html_s1_eth2_ifinpkts" class="text-right"></p>
-                        </div>
-                    </div>
-                    <!--<div class="col-md-12 text-right">-->
-                        <!--&lt;!&ndash;<div id="ifinpkts" style="height: 100%"></div>&ndash;&gt;-->
-                    <!--</div>-->
-                    <!-- /.panel-body -->
+
                 </div>
                 <!-- /.panel -->
             </div>
-            <div class="col-lg-4">
+            <div role="tabpanel" class="tab-pane fade active in" id="profile" >
                 <div class="panel panel-default">
                     <div class="panel-heading">ifinoctets</div>
 
-                    <div style="height: 250px;width: 500px;">
-                        <div style="height: 100%; margin: 0">
+                    <div class="panel-body">
+                        <div style="height: 300px; margin: 0">
                             <div id="main1" style="height: 100%"></div>
                         </div>
                     </div>
-                    <div class="col-md-12 text-right">
-                        <div id="ifinoctets" style="height: 100%"></div>
-                    </div>
+                    <p id="ifinoctets" class="text-right"></p>bytes
 
                 </div>
                 <!-- /.panel -->
             </div>
-            <div class="col-lg-4">
+            <div role="tabpanel" class="tab-pane fade active in" id="messages" >
                 <div class="panel panel-default">
                     <div class="panel-heading">ifoutpkts</div>
 
-                    <div style="height: 250px;width: 500px;">
-                        <div style="height: 100%; margin: 0">
-                            <div id="main2" style="height: 100%"></div>
-                            <p id="ifoutpkts" class="text-right"></p>
+                    <div class="panel-body">
+                        <div>
+                            <div style="height: 300px; margin: 0" class="col-md-6">
+                                <div id="main2" style="height: 100%"></div>
+
+                            </div>
+
+                            <div style="height: 300px; margin: 0" class="col-md-6">
+                                <div id="main_s1_eth1_ifoutpkts" style="height: 100%"></div>
+                                <!--<p id="html_s1_eth1_ifinpkts" class="text-right"></p>-->
+                            </div>
                         </div>
-                    </div>
-                    <div style="height: 250px;width: 500px;">
-                        <div style="height: 100%; margin: 0">
-                            <div id="main_s1_eth1_ifoutpkts" style="height: 100%"></div>
-                            <p id="html_s1_eth1_ifoutpkts" class="text-right"></p>
+                        <div>
+                            <div style="height: 300px; margin: 0" class="col-md-6">
+                                <div id="main_s1_eth2_ifoutpkts" style="height: 100%"></div>
+                                <!--<p id="html_s1_eth2_ifinpkts" class="text-right"></p>-->
+                            </div>
                         </div>
-                    </div>
-                    <div style="height: 250px;width: 500px;">
-                        <div style="height: 100%; margin: 0">
-                            <div id="main_s1_eth2_ifoutpkts" style="height: 100%"></div>
-                            <p id="html_s1_eth2_ifoutpkts" class="text-right"></p>
-                        </div>
+
                     </div>
 
-                    <!--<div class="col-md-12 text-right">-->
-                        <!--<div id="ifoutpkts" style="height: 100%"></div>-->
-                    <!--</div>-->
-                    <!-- /.panel-body -->
+
                 </div>
                 <!-- /.panel -->
             </div>
+            <div role="tabpanel" class="tab-pane fade" id="rtpkts">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Statistics</div>
+
+                    <div style="height: 250px;width: 500px;">
+                        <div style="height: 100%; margin: 0">
+                            <table id="jqGrid"></table>
+                            <!--<div id="jqGridPager" style="height: 36px"></div>-->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
             <!-- /.col-lg-12 -->
         </div>
+
+        <!--<div>-->
+            <!--<table id="jqGrid"></table>-->
+            <!--<div id="jqGridPager" style="height: 36px"></div>-->
+        <!--</div>-->
+
+
     </div>
 
 </div>
 
-<!-- jQuery -->
-<script src="/static/js/jquery.min.js"></script>
+<!--&lt;!&ndash; jQuery &ndash;&gt;-->
+<!--<script src="/static/js/jquery.min.js"></script>-->
+
+<!--<script type="text/ecmascript" src="/static/js/grid.locale-en.js"></script>-->
+<!--<script type="text/ecmascript" src="/static/js/jquery.jqGrid.js"></script>-->
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/static/js/bootstrap.min.js"></script>
+<!--<script src="/static/js/bootstrap.min.js"></script>-->
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="/static/js/metisMenu.min.js"></script>
@@ -365,175 +380,227 @@
 
 <script src="/static/js/echarts.min.js"></script>
 
+
 <!--//http://10.211.55.9:8008/metric/ALL/ifinpkts/json-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#jqGrid").jqGrid({
+            url: '/nodeConnector/getdemoNodesAllapi',
+            mtype: "GET",
+            // styleUI : 'Bootstrap',
+            datatype: "json",
+            colModel: [
+                { label: '节点连接ID', name: 'nodeConnectorId', key: true, width: 150 },
+                { label: '交换机端口号', name: 'numport', width: 150 },
+                { label: '发送包', name: 'tPkt', width: 150 },
+                { label: '接收包', name: 'rPkt', width: 150 },
+                { label:'发送字节', name: 'tByte', width: 150 },
+                { label:'接收字节', name: 'rByte', width: 150 }
+
+            ],
+            // viewrecords: true,
+            // width : 780,
+            height: 300
+            // rowNum: 7,
+            // pager: "#jqGridPager"
+        });
+    });
+
+</script>
+
 <script>
-    var myChart_ifinpkts = echarts.init(document.getElementById('main'));
-    var myChart_s1_eth1_ifinpkts = echarts.init(document.getElementById('main_s1_eth1_ifinpkts'));
-    var myChart_s1_eth2_ifinpkts = echarts.init(document.getElementById('main_s1_eth2_ifinpkts'));
-
-    var data = [];
-    var data_s1_eth1_ifinpkts = [];
-    var data_s1_eth2_ifinpkts = [];
-
-    for (var i = 1; i < 50; i++) {
-        data.push(0);
-        data_s1_eth1_ifinpkts.push(0);
-        data_s1_eth2_ifinpkts.push(0);
-
-    }
+    //tab boostrap 页面切换
+    $('#myTabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    });
 
 
-    option = {
+    // $('#myTabs a[href="#profile"]').tab('show') // Select tab by name
+    // $('#myTabs a:first').tab('show') // Select first tab
+    // $('#myTabs a:last').tab('show') // Select last tab
+    // $('#myTabs li:eq(2) a').tab('show') // Select third tab (0-indexed)
 
-        //--悬浮窗--
-        tooltip:{
-            trigger:'item', //当trigger为’item’时只会显示该点的数据，为’axis’时显示该列下所有坐标轴所对应的数据。
-            position:'bottom',//悬浮时显示的位置
-            backgroundColor:'#0050FF',
-            textStyle:{fontSize:18,},
-            formatter:function(params){//悬浮提示框显示的内容
+    $(function () {
 
-            }
-        },
+        var myChart_ifinpkts = echarts.init(document.getElementById('main'));
+        var myChart_s1_eth1_ifinpkts = echarts.init(document.getElementById('main_s1_eth1_ifinpkts'));
+        var myChart_s1_eth2_ifinpkts = echarts.init(document.getElementById('main_s1_eth2_ifinpkts'));
 
-        xAxis: {
-            // type:'',
-            // boundaryGap : false,
-            data: []
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            name: 'ifinpkts',
-            type: 'line',
-            smooth: false,
-            symbol: 'none',
-            // stack: 'a',
-            areaStyle: {
-                normal: {}
-            },
-            data: []
-        }]
-    };
+        var data = [];
+        var data_s1_eth1_ifinpkts = [];
+        var data_s1_eth2_ifinpkts = [];
 
-    //http://10.211.55.9:8008/metric/ALL/ifinpkts/json
-    setInterval(function() {
-        $.ajax({
-            type: "get",
-            async: true,
-            url: "/apis/metric/ALL/ifinpkts/json",
-            data: {},
-            // dataType: "json",
-            success: function(result) {
-                // alert(result[0].lastUpdate)
-                // data.push(result[0].lastUpdate);
-                data.push(result[0].metricValue);
-                if (data.length > 50) {
-                    data.shift()
+        for (var i = 1; i < 50; i++) {
+            data.push(0);
+            data_s1_eth1_ifinpkts.push(0);
+            data_s1_eth2_ifinpkts.push(0);
+
+        }
+
+
+        option = {
+
+            //--悬浮窗--
+            tooltip:{
+                trigger:'item', //当trigger为’item’时只会显示该点的数据，为’axis’时显示该列下所有坐标轴所对应的数据。
+                position:'bottom',//悬浮时显示的位置
+                backgroundColor:'#0050FF',
+                textStyle:{fontSize:18,},
+                formatter:function(params){//悬浮提示框显示的内容
+
                 }
-
-                myChart_ifinpkts.setOption({
-                    series: [{
-
-                        data: data
-                    }]
-
-                });
-
-                // $("#aa").html(result[0].lastUpdate);
-                $("#ifinpkts").html(result[0].metricValue);
-
             },
-            error: function(error) {
-                // alert(error)
-                // alert("图表请求数据失败！");
-                // console("tupiao request false")
-            }
-        });
-        // alert("data="+data);
-    }, 1000);
 
-    //http://10.211.55.9:8008/metric/ALL/4.ifinpkts/json
-    setInterval(function() {
-        $.ajax({
-            type: "get",
-            async: true,
-            url: "/apis/metric/ALL/4.ifinpkts/json",
-            data: {},
-            // dataType: "json",
-            success: function(result) {
-                // alert(result[0].lastUpdate)
-                // data.push(result[0].lastUpdate);
-                data_s1_eth1_ifinpkts.push(result[0].metricValue);
-                if (data_s1_eth1_ifinpkts.length > 50) {
-                    data_s1_eth1_ifinpkts.shift()
+            xAxis: {
+                // type:'',
+                // boundaryGap : false,
+                data: []
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: 'ifinpkts',
+                type: 'line',
+                smooth: false,
+                symbol: 'none',
+                // stack: 'a',
+                areaStyle: {
+                    normal: {}
+                },
+                data: []
+            }]
+        };
+
+        //http://10.211.55.9:8008/metric/ALL/ifinpkts/json
+        setInterval(function() {
+            $.ajax({
+                type: "get",
+                async: true,
+                url: "/apis/metric/ALL/ifinpkts/json",
+                data: {},
+                // dataType: "json",
+                success: function(result) {
+                    // alert(result[0].lastUpdate)
+                    // data.push(result[0].lastUpdate);
+                    data.push(result[0].metricValue);
+                    if (data.length > 50) {
+                        data.shift()
+                    }
+
+                    myChart_ifinpkts.setOption({
+                        title: {
+                            text: '所有端口接收的数据包'
+                        },
+                        series: [{
+
+                            data: data
+                        }]
+
+                    });
+
+                    // $("#aa").html(result[0].lastUpdate);
+                    $("#ifinpkts").html(result[0].metricValue);
+
+                },
+                error: function(error) {
+                    // alert(error)
+                    // alert("图表请求数据失败！");
+                    // console("tupiao request false")
                 }
+            });
+            // alert("data="+data);
+        }, 1000);
 
-                myChart_s1_eth1_ifinpkts.setOption({
-                    title: {
-                        text: 's1_eth1_ifinpkts'
-                    },
-                    series: [{
-                        name: '4.ifinpkts',
-                        data: data_s1_eth1_ifinpkts
-                    }]
+        //http://10.211.55.9:8008/metric/ALL/4.ifinpkts/json
+        setInterval(function() {
+            $.ajax({
+                type: "get",
+                async: true,
+                url: "/apis/metric/ALL/6.ifinpkts/json",
+                data: {},
+                // dataType: "json",
+                success: function(result) {
+                    // alert(result[0].lastUpdate)
+                    // data.push(result[0].lastUpdate);
+                    data_s1_eth1_ifinpkts.push(result[0].metricValue);
+                    if (data_s1_eth1_ifinpkts.length > 50) {
+                        data_s1_eth1_ifinpkts.shift()
+                    }
 
-                });
+                    myChart_s1_eth1_ifinpkts.setOption({
+                        title: {
+                            text: 's1_eth1端口接收的数据包'
+                        },
+                        series: [{
+                            name: '27.ifinpkts',
+                            data: data_s1_eth1_ifinpkts
+                        }]
 
-                // $("#aa").html(result[0].lastUpdate);
-                $("#html_s1_eth1_ifinpkts").html(result[0].metricValue);
+                    });
 
-            },
-            error: function(error) {
-                // alert(error)
-                // alert("图表请求数据失败！");
-                // console("tupiao request false")
-            }
-        });
-        // alert("data="+data);
-    }, 1000);
+                    // $("#aa").html(result[0].lastUpdate);
+                    $("#html_s1_eth1_ifinpkts").html(result[0].metricValue);
 
-    //http://10.211.55.9:8008/metric/ALL/5.ifinpkts/json
-    setInterval(function() {
-        $.ajax({
-            type: "get",
-            async: true,
-            url: "/apis/metric/ALL/5.ifinpkts/json",
-            data: {},
-            // dataType: "json",
-            success: function(result) {
-                // alert(result[0].lastUpdate)
-                // data.push(result[0].lastUpdate);
-                data_s1_eth2_ifinpkts.push(result[0].metricValue);
-                if (data_s1_eth2_ifinpkts.length > 50) {
-                    data_s1_eth2_ifinpkts.shift()
+                },
+                error: function(error) {
+                    // alert(error)
+                    // alert("图表请求数据失败！");
+                    // console("tupiao request false")
                 }
+            });
+            // alert("data="+data);
+        }, 1000);
 
-                myChart_s1_eth2_ifinpkts.setOption({
-                    series: [{
-                        name: '4.ifinpkts',
-                        data: data_s1_eth2_ifinpkts
-                    }]
+        // http://10.211.55.9:8008/metric/ALL/5.ifinpkts/json
+        setInterval(function() {
+            $.ajax({
+                type: "get",
+                async: true,
+                url: "/apis/metric/ALL/7.ifinpkts/json",
+                data: {},
+                // dataType: "json",
+                success: function(result) {
+                    // alert(result[0].lastUpdate)
+                    // data.push(result[0].lastUpdate);
+                    data_s1_eth2_ifinpkts.push(result[0].metricValue);
+                    if (data_s1_eth2_ifinpkts.length > 50) {
+                        data_s1_eth2_ifinpkts.shift()
+                    }
 
-                });
+                    myChart_s1_eth2_ifinpkts.setOption({
+                        title: {
+                            text: 's1_eth2接收的数据包'
+                        },
+                        series: [{
+                            name: '4.ifinpkts',
+                            data: data_s1_eth2_ifinpkts
+                        }]
 
-                // $("#aa").html(result[0].lastUpdate);
-                $("#html_s1_eth2_ifinpkts").html(result[0].metricValue);
+                    });
 
-            },
-            error: function(error) {
-                // alert(error)
-                // alert("图表请求数据失败！");
-                // console("tupiao request false")
-            }
-        });
-        // alert("data="+data);
-    }, 1000);
+                    // $("#aa").html(result[0].lastUpdate);
+                    $("#html_s1_eth2_ifinpkts").html(result[0].metricValue);
 
-    myChart_ifinpkts.setOption(option);
-    myChart_s1_eth1_ifinpkts.setOption(option);
-    myChart_s1_eth2_ifinpkts.setOption(option);
+                },
+                error: function(error) {
+                    // alert(error)
+                    // alert("图表请求数据失败！");
+                    // console("tupiao request false")
+                }
+            });
+            // alert("data="+data);
+        }, 1000);
+
+        myChart_ifinpkts.setOption(option);
+        myChart_s1_eth1_ifinpkts.setOption(option);
+        myChart_s1_eth2_ifinpkts.setOption(option);
+
+    });
+
+
 </script>
 
 <!--//http://10.211.55.9:8008/metric/ALL/ifinoctets/json-->
@@ -544,11 +611,23 @@
 
     for (var i = 1; i < 50; i++) {
         data_ifinoctets.push(0)
-
-
     }
 
     option_ifinoctets = {
+        title: {
+            text: '流量'
+        },
+
+        //--悬浮窗--
+        tooltip:{
+            trigger:'item', //当trigger为’item’时只会显示该点的数据，为’axis’时显示该列下所有坐标轴所对应的数据。
+            position:'bottom',//悬浮时显示的位置
+            backgroundColor:'#0050FF',
+            textStyle:{fontSize:18},
+            formatter:function(params){//悬浮提示框显示的内容
+
+            }
+        },
         xAxis: {
             data: []
         },
@@ -625,7 +704,9 @@
         data_s1_eth2_ifoutpkts.push(0);
     }
 
-    option_ifoutpkts = {
+   var option = {
+        tooltip:{},
+
         xAxis: {
             data: []
         },
@@ -663,6 +744,9 @@
                 }
 
                 myChart_ifoutpkts.setOption({
+                    title: {
+                        text: '所有端口发送的数据包'
+                    },
                     series: [{
 
                         data: data_ifoutpkts
@@ -681,14 +765,14 @@
             }
         });
         // alert("data="+data);
-    }, 2000);
+    }, 1000);
 
-    //http://10.211.55.9:8008/metric/ALL/4.ifoutpkts/json
+    // //http://10.211.55.9:8008/metric/ALL/4.ifoutpkts/json
     setInterval(function() {
         $.ajax({
             type: "get",
             async: true,
-            url: "/apis/metric/ALL/4.ifoutpkts/json",
+            url: "/apis/metric/ALL/6.ifoutpkts/json",
             data: {},
             // dataType: "json",
             success: function(result) {
@@ -700,6 +784,9 @@
                 }
 
                 myChart_s1_eth1_ifoutpkts.setOption({
+                    title: {
+                        text: 's1_eth1发送的数据包'
+                    },
                     series: [{
 
                         data: data_s1_eth1_ifoutpkts
@@ -718,14 +805,14 @@
             }
         });
         // alert("data="+data);
-    }, 2000);
+    }, 1000);
 
-    //http://10.211.55.9:8008/metric/ALL/4.ifoutpkts/json
+    // //http://10.211.55.9:8008/metric/ALL/4.ifoutpkts/json
     setInterval(function() {
         $.ajax({
             type: "get",
             async: true,
-            url: "/apis/metric/ALL/4.ifoutpkts/json",
+            url: "/apis/metric/ALL/7.ifoutpkts/json",
             data: {},
             // dataType: "json",
             success: function(result) {
@@ -737,6 +824,9 @@
                 }
 
                 myChart_s1_eth2_ifoutpkts.setOption({
+                    title: {
+                        text: 's1_eth2接收的数据包'
+                    },
                     series: [{
 
                         data: data_s1_eth2_ifoutpkts
@@ -755,11 +845,11 @@
             }
         });
         // alert("data="+data);
-    }, 2000);
+    }, 1000);
 
-    myChart_ifoutpkts.setOption(option_ifoutpkts);
-    myChart_s1_eth1_ifoutpkts.setOption(option_ifoutpkts);
-    myChart_s1_eth2_ifoutpkts.setOption(option_ifoutpkts);
+    myChart_ifoutpkts.setOption(option);
+    myChart_s1_eth1_ifoutpkts.setOption(option);
+    myChart_s1_eth2_ifoutpkts.setOption(option);
 
 </script>
 

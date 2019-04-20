@@ -46,7 +46,7 @@ public class OdlUtil {
         this.url = "http://" + host + ":" + port;
         this.username = username;
         this.password = password;
-        this.containerName = "default";
+//        this.containerName = "default";
         HttpRequest.setBasicAuth(getBasicAuthStr(username,password));
     }
 
@@ -142,7 +142,8 @@ public class OdlUtil {
         headers.put("Accept","application/json'");
         headers.put("Content-type","application/json");
         try {
-            String str = HttpRequest.sendPut(url + "/controller/nb/v2/flowprogrammer/" + containerName + "/node/OF/" + flow.getNode().getId() + "/staticFlow/" + flow.getName(),headers,json);
+//            String str = HttpRequest.sendPut(url + "/controller/nb/v2/flowprogrammer/" + containerName + "/node/OF/" + flow.getNode().getId() + "/staticFlow/" + flow.getName(),headers,json);
+            String str = HttpRequest.sendPut(url + "/restconf/config/opendaylight-inventory:nodes/node/" + flow.getNode().getId() + "/flow-node-inventory:table/0/flow/" + flow.getName(),headers,json);
             System.out.println(str);
             return str;
         }catch (Exception e){
@@ -151,6 +152,20 @@ public class OdlUtil {
         return null;
     }
 
+    /**
+     * 下发流表 2
+     * */
+    public String putFlow(String json,String nodeId,String tableId, String flowId) {
+        Map<String,String > headers = new HashMap<>();
+        headers.put("Accept","application/json'");
+        headers.put("Content-type","application/json");
+        try {
+            String str = HttpRequest.sendPut(url + "/restconf/config/opendaylight-inventory:nodes/node/" + nodeId + "/flow-node-inventory:table/"+tableId+"/flow/" + flowId,headers,json);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     /******************************************/
 
     private String getBasicAuthStr(String name,String password){

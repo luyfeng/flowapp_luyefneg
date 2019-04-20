@@ -11,6 +11,8 @@ public class NodeBean {
     private String id;
     @SerializedName("node-connector")
     private List<NodeConnectorBean> NodeConnector;
+    @SerializedName("flow-node-inventory:description")
+    private String flowNodeInventoryDescription;
     @SerializedName("flow-node-inventory:ip-address")
     private String FlowNodeInventory_IpAddress;
     @SerializedName("flow-node-inventory:software")
@@ -20,8 +22,33 @@ public class NodeBean {
     @SerializedName("flow-node-inventory:hardware")
     private String FlowNodeInventory_Hardware;
 
+    @Override
+    public String toString() {
+        return "NodeBean{" +
+                "id='" + id + '\'' +
+                ", NodeConnector=" + NodeConnector +
+                ", flowNodeInventoryDescription='" + flowNodeInventoryDescription + '\'' +
+                ", FlowNodeInventory_IpAddress='" + FlowNodeInventory_IpAddress + '\'' +
+                ", FlowNodeInventory_Software='" + FlowNodeInventory_Software + '\'' +
+                ", FlowNodeInventory_PortNumber=" + FlowNodeInventory_PortNumber +
+                ", FlowNodeInventory_Hardware='" + FlowNodeInventory_Hardware + '\'' +
+                '}';
+    }
+
+    public String getFlowNodeInventoryDescription() {
+        return flowNodeInventoryDescription;
+    }
+
+    public void setFlowNodeInventoryDescription(String flowNodeInventoryDescription) {
+        this.flowNodeInventoryDescription = flowNodeInventoryDescription;
+    }
+
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setNodeConnector(List<NodeConnectorBean> nodeConnector) {
@@ -44,10 +71,6 @@ public class NodeBean {
         FlowNodeInventory_Hardware = flowNodeInventory_Hardware;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public List<NodeConnectorBean> getNodeConnector() {
         return NodeConnector;
     }
@@ -68,15 +91,4 @@ public class NodeBean {
         return FlowNodeInventory_Hardware;
     }
 
-    @Override
-    public String toString() {
-        return "NodeBean{" +
-                "id='" + id + '\'' +
-                ", NodeConnector=" + NodeConnector +
-                ", FlowNodeInventory_IpAddress='" + FlowNodeInventory_IpAddress + '\'' +
-                ", FlowNodeInventory_Software='" + FlowNodeInventory_Software + '\'' +
-                ", FlowNodeInventory_PortNumber=" + FlowNodeInventory_PortNumber +
-                ", FlowNodeInventory_Hardware='" + FlowNodeInventory_Hardware + '\'' +
-                '}';
-    }
 }

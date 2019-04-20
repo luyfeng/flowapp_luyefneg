@@ -181,11 +181,11 @@
                     </li>
                     <li>
                         <a href="/th/flowui" class="active">
-                            <i class="fa fa-edit fa-fw"></i> flowui
+                            <i class="fa fa-edit fa-fw"></i> 流表操作
                         </a>
                     </li>
                     <li><a href="/th/echartdemo_topo">
-                            <i class="fa fa-dashboard fa-fw"></i> topoui
+                            <i class="fa fa-dashboard fa-fw"></i> 网络拓扑
                         </a>
                     </li>
                     <li>
@@ -195,19 +195,19 @@
                     </li>
                     <li>
                         <a href="/th/node_connector">
-                            <i class="fa fa-angellist fa-fw" ></i>设备信息
+                            <i class="fa fa-android fa-fw" ></i>设备信息
                         </a>
                     </li>
                     <li>
-                        <a href="">
-                            <i class="fa fa-line-chart fa-fw" ></i>导航5
+                        <a href="/th/demo_nodes">
+                            <i class="fa fa-phone fa-fw" ></i>实时设备
                         </a>
                     </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-line-chart fa-fw" ></i>导航6
-                        </a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a href="">-->
+                            <!--<i class="fa fa-line-chart fa-fw" ></i>导航6-->
+                        <!--</a>-->
+                    <!--</li>-->
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
@@ -220,7 +220,10 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Controller
                     <div class="text-right" style="float: right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#flowAddDialog">添加流表</button>
+                        <input type="button" class="btn btn-primary" onclick="Check()" value="下发流表" />
+                        <input type="button" class="btn btn-primary" onclick="Checkdel()" value="删除流表" />
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#flowAddDialog">添加数据</button>
                     </div>
                 </h1>
             </div>
@@ -291,9 +294,11 @@
                 <div class="panel panel-default table-responsive table-hover">
                     <div class="panel-heading">flow信息列表</div>
                     <!-- /.panel-heading -->
-                    <table class="table table-bordered table-striped ">
+                    <table id="Tab" class="table table-bordered table-striped ">
                         <thead>
                         <tr>
+                            <!--<th width="30"><input type="checkbox" id="all" onclick="selectOrClearAllCheckbox(this);" /></th>-->
+                            <th></th>
                             <th>flow_id</th>
                             <th>priority</th>
                             <th>table_id</th>
@@ -310,21 +315,22 @@
                         <tbody>
                         <tr th:each="tab:${flowList1.rows}">
                             <!--<td th:text="${tab.id}"></td>-->
-                            <td th:text="${tab.flowId}" th:id="${tab.flowId}"></td>
-                            <td th:text="${tab.priority}"></td>
-                            <td th:text="${tab.tableId}"></td>
-                            <td th:text="${tab.hardTimeout}"></td>
-                            <td th:text="${tab.idleTimeout}"></td>
-                            <td th:text="${tab.flowName}"></td>
-                            <td th:text="${tab.inPort}"></td>
-                            <td th:text="${tab.instructionOrder}"></td>
-                            <td th:text="${tab.actionOrder}"></td>
-                            <td th:text="${tab.outputNodeConnector}"></td>
+                            <td><input type="checkbox" th:id="${tab.id}" name="IDCheck" value="" class="" /></td>
+                            <td th:text="${tab.flowId}" th:id="${tab.flowId}" name="flowId" th:value="${tab.flowId}"></td>
+                            <td th:text="${tab.priority}" th:id="${tab.priority}" name="priority" th:value="${tab.priority}"></td>
+                            <td th:text="${tab.tableId}" th:id="${tab.tableId}" name="tableId" th:value="${tab.tableId}"></td>
+                            <td th:text="${tab.hardTimeout}" th:id="${tab.hardTimeout}" name="hardTimeout" th:value="${tab.hardTimeout}"></td>
+                            <td th:text="${tab.idleTimeout}" th:id="${tab.idleTimeout}" name="idleTimeout" th:value="${tab.idleTimeout}"></td>
+                            <td th:text="${tab.flowName}" th:id="${tab.flowName}" name="flowName" th:value="${tab.flowName}"></td>
+                            <td th:text="${tab.inPort}" th:id="${tab.inPort}" name="inPort" th:value="${tab.inPort}"></td>
+                            <td th:text="${tab.instructionOrder}" th:id="${tab.instructionOrder}" name="instructionOrder" th:value="${tab.instructionOrder}"></td>
+                            <td th:text="${tab.actionOrder}" th:id="${tab.actionOrder}" name="actionOrder" th:value="${tab.actionOrder}"></td>
+                            <td th:text="${tab.outputNodeConnector}" th:id="${tab.outputNodeConnector}" name="outputNodeConnector" th:value="${tab.outputNodeConnector}"></td>
                             <td>
                                 <!--<a th:href="@{/flow/queryFlowById(id=${tab.id})}" class="btn btn-primary btn-xs" data-toggle="modal"-->
                                    <!--data-target="#customerEditDialog" onclick="editCustomer(${row.cust_id})">修改</a>-->
                                 <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-                                   data-target="#customerEditDialog" th:onclick="'javascript:editFlow(\''+${tab.id}+'\')' ">流表操作</a>
+                                   data-target="#customerEditDialog" th:onclick="'javascript:editFlow(\''+${tab.id}+'\')' ">数据操作</a>
                                 <!--<a th:href="@{/flow/queryFlowById(id=${tab.id})}" onclick="">修改</a>-->
                                 <a class="btn btn-danger btn-xs"
                                    th:onclick="'javascript:deleteFlow(\''+${tab.id}+'\')' ">删除数据</a>
@@ -333,6 +339,7 @@
                         </tr>
                         </tbody>
                     </table>
+
                     <div class="col-md-12 text-right">
                         <!--<itheima:page url="${pageContext.request.contextPath }/customer/list.action" />-->
 
@@ -487,7 +494,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <!--<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存修改</button>-->
                 <button type="button" class="btn btn-primary" onclick="updateFlow()">保存修改</button>
-                <button type="button" class="btn btn-primary" onclick="delFlow()">删除流表</button>
+                <button type="button" class="btn btn-primary" onclick="delFlow()">删除数据</button>
             </div>
         </div>
     </div>
@@ -586,7 +593,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <!--<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存修改</button>-->
-                <button type="button" class="btn btn-primary" onclick="addFlow()">下发流表</button>
+                <button type="button" class="btn btn-primary" onclick="addFlow()">添加</button>
             </div>
         </div>
     </div>
@@ -609,7 +616,109 @@
 <!-- Custom Theme JavaScript -->
 <script src="/static/js/sb-admin-2.js"></script>
 
-<script>
+<script type="text/javascript">
+
+    $(function() {
+        $('#Tab').find('input[type=checkbox]').bind('click', function(){
+            var id = $(this).attr("id");
+
+            //当前的checkbox是否选中
+            if(this.checked){
+                //除当前的checkbox其他的都不选中
+                $("#Tab").find('input[type=checkbox]').not(this).attr("checked", false);
+
+                //选中的checkbox数量
+                var selectleng = $("input[type='checkbox']:checked").length;
+                console.log("选中的checkbox数量"+selectleng);
+            }else{
+                //未选中的处理
+                console.log("未选中的处理");
+            }
+        });
+    });
+
+
+    function Checkdel() {
+        var Tabobj = $("#Tab");
+        var Check = $("table input[type=checkbox]:checked");//在table中找input下类型为checkbox属性为选中状态的数据
+        Check.each(function () {//遍历
+            var row = $(this).parent("td").parent("tr");//获取选中行
+            var flowId = row.find("[name='flowId']").html();//获取name=''的值
+            var priority = row.find("[name='priority']").html();
+            var tableId = row.find("[name='tableId']").html();
+            var hardTimeout = row.find("[name='hardTimeout']").html();
+            var idleTimeout = row.find("[name='idleTimeout']").html();
+            var flowName = row.find("[name='flowName']").html();
+            var inPort = row.find("[name='inPort']").html();
+            var instructionOrder = row.find("[name='instructionOrder']").html();
+            var actionOrder = row.find("[name='actionOrder']").html();
+            var outputNodeConnector = row.find("[name='outputNodeConnector']").html();
+            console.log("flowIddel=="+flowId);
+            console.log("rowjsondel=="+JSON.stringify(row));
+
+            $.ajax({
+                url: "http://10.211.55.10:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/flow-node-inventory:table/"+tableId+"/flow/"+flowId,
+                type: "delete",
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                dataType: "text",
+                data: {},
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader("Authorization",
+                        //"Basic " + encodeBase64(username + ":" + password));
+                        "Basic YWRtaW46YWRtaW4=");
+                },
+                success: function(data) {
+                    alert("addflow success!")
+                },
+                error: function() {
+                    alert("addflow fail!")
+                }
+            });
+        });
+    }
+
+    function Check() {
+        var Tabobj = $("#Tab");
+        var Check = $("table input[type=checkbox]:checked");//在table中找input下类型为checkbox属性为选中状态的数据
+        Check.each(function () {//遍历
+            var row = $(this).parent("td").parent("tr");//获取选中行
+            var flowId = row.find("[name='flowId']").html();//获取name='Sid'的值
+            var priority = row.find("[name='priority']").html();
+            var tableId = row.find("[name='tableId']").html();
+            var hardTimeout = row.find("[name='hardTimeout']").html();
+            var idleTimeout = row.find("[name='idleTimeout']").html();
+            var flowName = row.find("[name='flowName']").html();
+            var inPort = row.find("[name='inPort']").html();
+            var instructionOrder = row.find("[name='instructionOrder']").html();
+            var actionOrder = row.find("[name='actionOrder']").html();
+            var outputNodeConnector = row.find("[name='outputNodeConnector']").html();
+            console.log("flowId=="+flowId);
+            console.log("rowjson=="+JSON.stringify(row));
+
+            $.ajax({
+                type : "post",
+                url : "/send/put",
+                data : {
+                    "flowId" : flowId,
+                    "priority" : priority,
+                    "tableId" : tableId,
+                    "hardTimeout" : hardTimeout,
+                    "idleTimeout" : idleTimeout,
+                    "flowName" : flowName,
+                    "inPort" : inPort,
+                    "instructionOrder" : instructionOrder,
+                    "actionOrder" : actionOrder,
+                    "outputNodeConnector" : outputNodeConnector
+                },
+                success : function (result) {
+                    alert("流表添加成功！");
+                    // window.location.reload();
+                }
+            })
+        });
+    }
+
     function editFlow(id) {
         $.ajax({
             type : "get",
@@ -721,20 +830,20 @@
     
     function deleteFlow(id) {
 
-        //************************************************流表操作*删除*****************************************************
+//************************************************流表操作*删除**************************************************
 
 
 
-        //************************************************流表操作******************************************************
+//************************************************流表操作******************************************************
 
 
-        if (confirm('确定要删除该流表?')) {
+        if (confirm('确定要删除该数据?')) {
             $.ajax({
                 type : "post",
                 url : "/flow/deleteFlow",
                 data : {"id" : id},
                 success : function (result) {
-                    alert("流表删除成功！");
+                    alert("数据删除成功！");
                     window.location.reload();
                 }
             })
@@ -816,13 +925,13 @@
 
         //******************************************************************************************************
 
-        if (confirm('确定要删除该流表?')) {
+        if (confirm('确定要删除该数据?')) {
             $.ajax({
                 type : "post",
                 url : "/flow/deleteFlow",
                 data : {"id" : id},
                 success : function (result) {
-                    alert("流表删除成功！");
+                    alert("数据删除成功！");
                     window.location.reload();
                 }
             })
